@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>biblioteca</title>
+</head>
+<body>
+	<form name="formulario">
+		Titulo: <input type="text" name="titulo"><br>
+		Autor: <input type="text" name="autor"><br>
+		Editorial: <input type="text" name="editorial"><br>
+		<input type="button" value="agregar" onclick="guardar();">
+		<input type="button" value="buscar" onclick="buscar();"><br>
+		<input type="text" name="estado" readonly>
+	</form>
+	<script type="text/javascript">
+		function Libro(titulo,autor,editorial)
+		{
+			this.titulo=titulo;
+			this.autor=autor;
+			this.editorial=editorial;
+		}
+		function resetear()
+		{
+			form.titulo.value="";
+			form.autor.value="";
+			form.editorial.value="";
+		}
+		function guardar()
+		{	
+			let libro=new Libro(form.titulo.value,form.autor.value,form.editorial.value);
+			datos.push(libro);
+			form.estado.value="Libro '"+libro.titulo+"' guardado";
+			resetear();
+		}
+		function buscar()
+		{
+			console.log("Empieza a buscar");
+			var tit=form.titulo.value;
+			var encontrado=false;
+			for (var i = 0; i < datos.length && !encontrado; i=i+1) 
+			{
+				console.log("i: "+i);
+				if(datos[i].titulo==tit)
+				{
+					encontrado=true;
+				}	
+			}
+			if(encontrado)
+			{
+				var lib=datos[i-1];
+				form.titulo.value=lib.titulo;
+				form.autor.value=lib.autor;
+				form.editorial.value=lib.editorial;
+			}
+			else
+			{
+				form.estado.value="Libro '"+ tit + "' no encontrado";
+			}
+		}
+		var datos=new Array();
+		var form=document.formulario;
+		
+	</script>
+</body>
+</html>

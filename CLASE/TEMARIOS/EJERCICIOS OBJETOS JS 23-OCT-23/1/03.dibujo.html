@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujo triguangulo</title>
+</head>
+<body>
+    <h1>Diseña tu propio triangulo</h1>
+    <form>
+        De que tamaño tiene que ser la base: <input type="number" id="base"> <br>
+        <input type="button" value="Enviar y dibujar" onclick="dibujar()"><br><br>
+        
+        <textarea type="text" name="areaDibujo" readonly></textarea>
+    </form>
+
+    <script>
+        function dibujar(){
+            var $nAsteriscos = document.getElementById('base').value;
+            var $msg = "";
+
+            for ($i = 0;$i <= $nAsteriscos;$i++){
+                for ($j = 0; $j < $i;$j++){
+                    $msg += "*";
+                }
+                $msg += "\n";
+            }
+
+            document.getElementsByName('areaDibujo')[0].value = $msg;
+
+        }
+    </script>
+</body>
+</html>

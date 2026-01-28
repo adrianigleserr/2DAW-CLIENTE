@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci V 1.0</title>
+</head>
+<body>
+    <h3>Introduzca la posición de la que quiera saber el valor Fibonacci</h3><br><br>
+    <label for="">Posición: </label><input type="text" name="valorfibonacci"><br><br>
+    <input type="button" value="Calcular" onclick="inicializar()"><br><br>
+    <h3>Este sería el resultado</h3><br><br>
+    <input type="text" name="valorfibonacci">
+    <script>
+        var posicion;
+        var valor;
+        function inicializar(){
+            posicion=document.getElementsByName('valorfibonacci')[0].value;
+            valor=fibonacciv2(posicion);
+            document.getElementsByName('valorfibonacci')[1].value=valor;
+        }
+        function fibonacciv2(x){
+            //acumuladores de los dos elementos anteriores;
+            let acu1=1;
+            let acu2=0;
+            //acumula el resultado final
+            let vfFibonacci=1;
+            if (x==0) {
+                return 0;
+            }
+            else if (x==1){
+                return 1;
+            }
+            else{
+               for (let i=2; i<=x;i++){
+                   //se actualizan los valores para la siguiente suma;
+                   [acu1,acu2]=[acu2,vfFibonacci];
+                   //resultado;
+                   vfFibonacci=acu1+acu2
+               }
+               return vfFibonacci;
+            }
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triángulo Rectángulo a izdas</title>
+</head>
+<body>
+    <h2>DIBUJANDO TRIÁNGULO RECTÁNGULO</h2>
+    <label for="">Número Columnas:</label><input type="text" id="cols" placeholder="Introduce el número de columnas"><br><br>
+    <label for="">Número de filas:</label><input type="text" id="filas" placeholder="Introduce el número de filas"><br><br>
+    <input type="button" value="VISUALIZAR" onclick="adibujar();"><br><br>
+    <h3>EL TRIÁNGULO QUEDA ASÍ . . . </h3>
+    <textarea  id="pantalla" cols="30" rows="10"></textarea>
+    <script>
+        let cjacols=document.getElementById("cols");
+        let cjafilas=document.getElementById("filas");
+        let cjapantalla=document.getElementById("pantalla");
+        
+        let adibujar=()=>{
+            let texto="";
+            cjapantalla.value=texto;
+            let i=0;
+            let j=0;
+            let control=0;
+            for(i=0;i<=cjafilas.value;i++){
+                control=cjacols.value - i;
+                for(j=0;j<=cjacols.value;j++){
+                    if (j < control){
+                    texto=texto + " ";
+                    }else{
+                        texto=texto + "*";
+                    }
+                }
+                texto=texto + "\n";
+            }
+            cjapantalla.value=texto;
+        }
+    </script>
+</body>
+</html>
