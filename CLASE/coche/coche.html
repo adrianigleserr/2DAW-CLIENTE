@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Modificando el objeto</h2>
+    <label for="">Marca:</label><input type="text" name="coches"><br><br>
+    <label for="">Modelo:</label><input type="text" name="coches"><br><br>
+    <label for="">Año:</label><input type="text" name="coches"><br><br>
+    <input type="button" value="Aceptar" onclick="modificando()">
+    <h2>Visualizando datos</h2>
+    <textarea name="" id="visualizar" onclick="Visualizando()"></textarea>
+    <script>
+        let miAuto=new Object();
+        miAuto.marca="Ford";
+        miAuto.modelo="Mustang";
+        miAuto.annio="1968";
+        console.log(miAuto);
+        alert(miAuto.annio);
+        function modificando(){
+            miAuto.marca=document.getElementsByNam("coches")[0].value;
+            miAuto.modelo=document.getElementsByNam("coches")[1].value;
+            miAuto.annio=document.getElementsByNam("coches")[2].value;
+        }
+        function Visualizando(){
+            document.getElementsByName("datos").value=miAuto.marca;
+        }
+        function mostrarPropiedad(){
+            var resultado="";
+            for (var i in objeto){
+                if (objeto.hasOwnProperty(i)){
+                    resultado += nombreObjeto + "." + i + "=" +objeto[i] +"\n"
+                }
+            }
+            return resultado;
+        }
+
+        console.log(mostrarPropiedades(miAuto, "miAuto") );
+        miAuto.marca = Ford
+        miAuto.modelo = Mustang
+        miAuto.annio = 1969
+
+    </script>
+</body>
+</html>
