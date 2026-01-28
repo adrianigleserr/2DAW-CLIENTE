@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="empezarTimer()">
+    <p>Cada 2 segundos aparece una nueva foto.</p>
+
+    <img src="jugador-1.jpg" id="futbol" width="300" height="auto">
+
+    <script>
+        let IDTemporizador;
+        let numero = 0;
+
+        function empezarTimer() {
+            IDTemporizador = setInterval(actualizarImagen, 2000);
+        }
+
+        function actualizarImagen() {
+            if (numero < 5) {
+                numero++;
+            } else {
+                numero = 1;
+            }
+            document.getElementById("futbol").src = "jugador-" + numero + ".jpg";
+        }
+
+    </script>
+</body>
+
+</html>

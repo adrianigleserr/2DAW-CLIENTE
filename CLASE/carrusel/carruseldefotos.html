@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Jugadores</title>
+</head>
+<body>
+    <p>Ve pasando imágenes continuas, tanto para adelante como para atrás.</p>
+    
+    <img src="jugador-1.jpg" id="futbol" width="300" height="auto">
+
+    <form>
+        <input type="button" onclick="retrasar()" value="Retrasar">
+        <input type="button" onclick="avanzar()" value="Avanzar">
+    </form>
+
+    <script>
+        let numero = 1;
+
+        function actualizarImagen() {
+            document.getElementById("futbol").src = "jugador-" + numero + ".jpg";
+        }
+
+        function avanzar() {
+            if (numero < 5) {
+                numero++;
+            } else {
+                numero = 1;
+            }
+            actualizarImagen();
+        }
+
+        function retrasar() {
+            if (numero > 1) {
+                numero--; //
+            } else {
+                numero = 5;
+            }
+            actualizarImagen();
+        }
+    </script>
+</body>
+</html>
