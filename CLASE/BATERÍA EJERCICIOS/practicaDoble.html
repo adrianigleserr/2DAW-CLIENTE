@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Validación</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulario de Registro</h2>
+        <form id="registroForm" onsubmit="return validarFormulario()">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" required>
+            </div>
+            
+            <br>
+
+            <div class="form-group">
+                <label for="clave">Clave:</label>
+                <input type="password" id="clave" required>
+            </div>
+
+            <br>
+            
+            <button type="submit">Comprobar</button>
+        </form>
+    </div>
+
+    <script>
+        function validarFormulario() {
+            let isValid = true;
+            
+            const nombre = document.getElementById('nombre').value.trim();
+            const apellido = document.getElementById('apellido').value.trim();
+            const clave = document.getElementById('clave').value;
+            const confirmClave = document.getElementById('confirmClave').value;
+
+            document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+
+            if (nombre === '') {
+                document.getElementById('nombreError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (apellido === '') {
+                document.getElementById('apellidoError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (clave.length < 6) {
+                document.getElementById('claveError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (clave !== confirmClave) {
+                document.getElementById('confirmClaveError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Registro exitoso!');
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
