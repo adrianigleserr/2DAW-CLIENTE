@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        #reloj {
+            font-size: 8rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: -2px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="reloj"></h1>
+    <script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            let horas = ahora.getHours();
+            let minutos = ahora.getMinutes();
+            let segundos = ahora.getSeconds();
+
+            if (horas < 10) {
+                horas = "0" + horas;
+            }
+
+            if (minutos < 10) {
+                minutos = "0" + minutos;
+            }
+
+            if (segundos < 10) {
+                segundos = "0" + segundos;
+            }
+
+            document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+        }
+
+        actualizarReloj();
+
+        setInterval(actualizarReloj, 1000);
+
+    </script>
+</body>
+
+</html>

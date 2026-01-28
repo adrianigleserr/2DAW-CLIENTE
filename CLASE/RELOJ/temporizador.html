@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="activartemporizador()">
+    <label for="">DATOS:</label><textarea name="" id="caja"></textarea>
+    <input type="button" onclick="eliminarsaludo()">
+    <script>
+        let IDtemporizador;
+
+        function activartemporizador(){
+            IDtemporizador = setTimeout(saludo, 2000);
+        }
+
+        function saludo(){
+            document.getElementById("caja").value="Buenos dias 2DAW";
+        }
+
+        function eliminarsaludo(){
+            clearTimeout(IDtemporizador);
+        }   
+        </script>
+    
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cuenta Atrás Dark</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+
+        #reloj {
+            font-size: 10rem;
+            font-weight: 800;
+            margin: 0;
+            color: #60a5fa;
+            letter-spacing: -5px;
+            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #caja {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            background-color: #22c55e;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.4);
+        }
+
+        #caja:hover {
+            background-color: #16a34a;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+        }
+
+        #caja:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="reloj">30</h1>
+    <input id="caja" type="button" onclick="activartemporizador()" value="Iniciar Cuenta">
+
+    <script>
+        let numero = 30;
+        let id;
+        const pantalla = document.getElementById('reloj');
+
+        function activartemporizador() {
+            clearInterval(id);
+            numero = 30;
+            pantalla.innerText = numero;
+            pantalla.style.color = "#60a5fa";
+            id = setInterval(comienza, 1000);
+        }
+
+        function comienza() {
+            numero--;
+            if (numero < 0) {
+                clearInterval(id);
+                pantalla.innerText = "¡TIEMPO!";
+                pantalla.style.color = "#ef4444";
+            } 
+        }
+    </script>
+</body>
+
+</html>
