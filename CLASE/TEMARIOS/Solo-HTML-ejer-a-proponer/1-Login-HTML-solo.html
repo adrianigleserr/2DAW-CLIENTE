@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejemplo de almacenamiento de session con HTML5</title>
+	<style type="text/css">
+		body {
+			font-family: sans-serif;
+		}
+
+		span#mensajes {
+			color: blue;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Ejemplo de almacenamiento de session con HTML5</h1>
+
+	<h3>Login:</h3>
+	<table>
+		<tr>
+			<td>Usuario:</td>
+			<td><input type="text" name="user" /></td>
+		</tr>
+		<tr>
+			<td>Contraseña:</td>
+			<td><input type="text" name="user" /></td>
+		</tr>
+		<tr>
+			<td><input type="button" name="Envio" value="Enviar" onclick="enviar()" /></td>
+			<td><input type="button" name="Mostrar" value="Mostrar" onclick="mostrar()"/></td>
+		</tr>
+	</table>
+
+	<script>
+
+		function enviar(){
+			var inputs = document.getElementsByName('user');
+			var usuario = inputs[0].value;
+			var password = inputs[1].value;
+
+			localStorage.setItem('usuario_registrado', usuario);
+			localStorage.setItem('passw_registrado', password);
+
+			alert("Chaval,\n has guardado todo bien");
+		}
+
+		function mostrar(){
+			var usuario2 = localStorage.getItem('usuario_registrado');
+			var password2 = localStorage.getItem('passw_registrado');
+
+			alert("Datos recuperado: \n Usuario: "+usuario2+"\n Contraseña: "+password2);
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!Doctype html>
+<html>
+<head>
+<title> Ventana de reporte </title>
+</head>
+<body>
+<h1> Recopilando datos </h1>
+<textarea id="facturafinal" cols="90" rows="7">
+
+</textarea>
+<script>
+function resumen(){
+
+//alert(sessionStorage.ciudad);
+//alert(sessionStorage.residencia);
+//alert(sessionStorage.inicioestancia);
+//alert(sessionStorage.finestancia);
+
+
+document.getElementById("facturafinal").value="La ciudad elegida para pasar sus vacaciones es " + sessionStorage.ciudad + " y se alojará en "+ sessionStorage.residencia + "\n\n\n" + "desde el " + sessionStorage.inicioestancia + " hasta  " + sessionStorage.finestancia;
+
+}
+document.addEventListener("DOMContentLoaded", resumen());
+</script>
+
+</body>
+</html>

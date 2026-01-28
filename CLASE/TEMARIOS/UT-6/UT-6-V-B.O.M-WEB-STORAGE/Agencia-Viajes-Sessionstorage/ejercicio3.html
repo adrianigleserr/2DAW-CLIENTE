@@ -1,0 +1,48 @@
+<!Doctype html>
+<html>
+<head>
+<title>Ejercicio 3</title>
+<script>
+function cambio(){
+var indicelugar=document.getElementById("DESTINO").selectedIndex;
+var lugar=document.getElementById("DESTINO").options[indicelugar].text;
+//alert(lugar);
+sessionStorage.ciudad=lugar;
+var indiceAloja=document.getElementById("ALOJAMIENTO").selectedIndex;
+var hospedaje=document.getElementById("ALOJAMIENTO").options[indiceAloja].text;
+sessionStorage.residencia=hospedaje;
+var primerdia=document.getElementById("inicio").value;
+sessionStorage.inicioestancia=primerdia;
+
+var ultimodia=document.getElementById("fin").value;
+sessionStorage.finestancia=ultimodia;
+//window.location="pagina2.html";Esto no añade nuevo Tab de navegador
+window.open("pagina2.html");
+
+
+}
+</script>
+</head>
+<body>
+<p><b>DESTINO: </b>
+<select size="1" id="DESTINO">
+<option value="" selected>Selecciona destino</option>
+<option value="Paris" >Paris</option>
+<option value="Londres">Londres</option>
+<option value="Berlin">Berlin</option>
+<option value="Roma">Roma</option>
+</select></p>
+<p><b>ALOJAMIENTO: </b>
+<select size="1" id="ALOJAMIENTO">
+<option value="" selected>Selecciona Alojamiento</option>
+<option value="Hotel" >Hotel</option>
+<option value="Apartamento">Apartamento</option>
+<option value="Casa Rural">Casa Rural</option>
+<option value="Amigos">Amigos</option>
+</select></p>
+<p> ESTANCIA </p>
+<p>Desde<input type="text" id="inicio"><br><br>
+Hasta<input type="text" id="fin"></p>
+<button  onclick="cambio()">Aceptar datos</button>
+</body>
+</html>
