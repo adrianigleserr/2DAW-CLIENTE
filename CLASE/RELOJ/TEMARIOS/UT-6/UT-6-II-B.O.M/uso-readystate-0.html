@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uso ReadyState</title>
+</head>
+
+<body>
+    <label for="">Nombre: </label><input type="text" id="nombre">
+    <label for="">Apellidos:</label><input type="text" id="apellidos">
+    <label for="">Fecha Nacimiento:</label><input type="date" id="Nacimiento">
+    <input type="button" value="Visualizar" onclick="visualizar();">
+    <script>
+        var nombre;
+        var apellidos;
+        var nacimiento;
+        document.onreadystatechange = function() {
+            if(document.readyState == "loading"){
+                console.log("Documento cargándose");
+            }
+            if(document.readyState == "interactive"){
+                console.log("Documento en modo interactivo");
+            }
+            if(document.readyState == "complete"){
+            nombre=document.getElementById("nombre");
+            apellidos=document.getElementById("apellidos");
+            nacimiento=document.getElementById("Nacimiento");
+            console.log(document.activeElement);
+            console.log("La carga del documento ha finalizado");
+            }
+        }
+        function visualizar(){
+            alert(nombre.value + " " + apellidos.value + " " + nacimiento.value);
+
+            
+        } 
+      
+    </script>
+</body>
+</html>

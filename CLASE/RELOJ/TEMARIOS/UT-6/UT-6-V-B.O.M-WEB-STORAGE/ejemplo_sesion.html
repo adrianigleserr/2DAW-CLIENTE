@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Documento sin título</title>
+<script type="text/javascript">
+
+var almacenar = new Array();
+
+function guardarDatos(){
+
+var datos = document.getElementById("nombre").value;
+window.sessionStorage.setItem("salvado",datos);
+
+}
+
+function cargarDatos(){
+
+var contenedor = document.getElementById("contenido");
+almacenar.push(window.sessionStorage.getItem("salvado"));
+console.log(almacenar);
+contenido.value = almacenar.toString();
+}
+
+
+</script>
+
+
+</head>
+
+
+<body>
+<table>
+<tr><td>Nombre</td>
+<td><input type="text" id='nombre' /></td></tr>
+<tr><td>Contenido</td><td><textarea id="contenido" rows="3" cols="30"></textarea></td></tr>
+<tr><td><input type="button" id="salvar" value="Guardar Datos" onclick="guardarDatos()" /></td><td><input type="button" id="cargar" value="Cargar Datos" onclick="cargarDatos()" /></td>
+</tr>
+
+
+</table>
+</body>
+
+</html>

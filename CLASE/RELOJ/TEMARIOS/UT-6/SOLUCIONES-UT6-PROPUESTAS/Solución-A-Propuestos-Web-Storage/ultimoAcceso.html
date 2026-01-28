@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fecha</title>
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<form id="form">
+		Nombre:
+		<input type="text" name="nombre" id="nom">
+		<br>
+		Apellido:
+		<input type="text" name="apellido" id="ape">
+		<br>
+		<input type="button" value="entrar" onclick="printMensaje()">
+	</form>
+	<div id="mensaje">
+		
+	</div>
+	<script>
+		function printMensaje()
+		{
+			var nombre=document.getElementById("nom");
+			var apellido=document.getElementById("ape");
+			var cajaMensaje=document.getElementById("mensaje");
+			cajaMensaje.innerHTML="";
+			var mensaje;
+			if(nombre.value==""||apellido.value==""){
+				alert("introduce los valores");
+			}
+			else
+			{
+				var acceso=window.localStorage.getItem(nombre.value+"Acceso");
+				if(acceso==null)
+				{
+					mensaje="Bienvenido a tu primera visita, Sr. "+apellido.value;
+				}
+				else
+				{
+					mensaje="Bienvenido de vuelta, Sr. "+apellido.value+"<br>Su ultimo acceso fue el "+acceso;
+				}
+				var fechaActual=new Date();
+				var fecha=fechaActual.getDate()+"-"+(fechaActual.getMonth()-0+1)+"-"+fechaActual.getFullYear()+" a las "+(fechaActual.getHours()-0+1)+":"+fechaActual.getMinutes();
+				window.localStorage.setItem(nombre.value+"Acceso",fecha);
+
+				cajaMensaje.innerHTML=mensaje;
+			}
+		}
+	</script>
+</body>
+</html>

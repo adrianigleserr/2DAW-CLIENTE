@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Ejemplo de almacenamiento de session con HTML5</title>
+<style type="text/css">
+body {
+	font-family: sans-serif;
+}
+span#mensajes {
+	color: blue;	
+}
+</style>
+</head>
+<body onload="refrescaTodo()">
+<h1>Ejemplo de almacenamiento de session con HTML5</h1>
+
+<h3>Login:</h3>
+<table>
+	<tr>
+		<td>Usuario:</td>
+		<td><input type="text" name="user"/></td>
+	</tr>
+	<tr>
+		<td>Contraseña:</td>
+		<td><input type="text" name="user"/></td>
+	</tr>
+	<tr>
+		<td><input type="button" name="Envio" value="Enviar" onClick="guardar()"/></td>
+		<td><input type="button" name="Mostrar" value="Mostrar" onClick="mostrar()"/></td>
+	</tr>
+</table>
+<script type="text/javascript">
+	
+	// por defecto almacenamiento local
+	var storage = sessionStorage;
+
+	function guardar() {
+		var usuario=document.getElementsByName("user")[0].value;
+		var pass=document.getElementsByName("user")[1].value;
+		storage.setItem("usuario",usuario);
+		storage.setItem("password",pass);
+	
+	}
+	
+	function mostrar() {
+	
+		alert("Usuario: "+storage.getItem("usuario"));
+		alert("Contraseña: "+storage.getItem("password"));
+	
+	}
+
+</script>
+
+</body>
+</html>
