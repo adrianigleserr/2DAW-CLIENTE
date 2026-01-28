@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <label for="">Inserte frase: </label><input type="text" value="" name="cajafrase"><br><br>
+   <label for="">Haga clic para carácter de parada: </label><input type="button" value="RAMDOMIZAR CHAR PARADA" onclick="paradachar()"><br><br>
+   <label for="">El carácter de parada es: </label><input type="text" name="stopchar" value=""><br><br>
+   <label for="">Generar carácter aleatorio dentro de la frase dada: </label><br><br>
+   <input type="button" value="RAMDOMIZAR" onclick="vercharaleatorio()"><p>                   </p><input type="text" name="chargenerado" value="">
+
+   <script>
+       var indiceparada;
+       var frase;
+
+       function paradachar(){
+        frase=document.getElementsByName("cajafrase")[0].value;
+        indiceparada=Math.floor(Math.random()*frase.length);
+        document.getElementsByName("stopchar")[0].value=frase.charAt(indiceparada);
+       }
+       function vercharaleatorio(){
+        //let indicealeatorio=Math.floor(Math.random()*frase.length);
+	let indicealeatorio=Math.floor(Math.random()*indiceparada);
+        document.getElementsByName("chargenerado")[0].value=frase.charAt(indicealeatorio);
+        if ((document.getElementsByName("stopchar")[0].value) == (document.getElementsByName("chargenerado")[0].value)){
+            alert("coincidencia de caracteres");
+            window.close();
+        }
+       }
+
+   </script>
+
+</body>
+</html>
