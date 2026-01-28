@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tirar Dados</title>
+</head>
+<body>
+    <button onclick="tirarDados()">Generar</button>
+
+    <h3>Numero Generado:</h3>
+    <input type="text" id="resultado" readonly>
+
+    <script>
+        function tirarDados() {
+            let resultado = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("resultado").value = resultado;
+        }
+    </script>
+</body>
+</html>

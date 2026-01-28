@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="verduras.css">
+</head>
+<body>
+    <p>¿Qué fruta le podemos ofrecer?</p>
+    <input type="text" id="fruta" size="50"><br><br>
+    <button onclick="mostrarFruta()">Enviar</button><br><br>
+
+    <p>Información del producto</p>
+    <input type="text" id="mostrarFrutaSeleccionada" size="50">
+
+    <script>
+        function mostrarFruta() {
+            const tipoFruta = document.getElementById('fruta').value;
+
+            switch (tipoFruta) {
+                case "Naranjas":
+                    console.log = "Naranjas cuestan 0,59€ el kilo.";
+                    break;
+                case "Manzanas":
+                    console.log = "Manzanas cuestan 0,32€ el kilo.";
+                    break;
+                case "Plátanos":
+                    console.log = "Plátanos cuestan 0,48€ el kilo.";
+                    break;
+                case "Cerezas":
+                    console.log = "Cerezas cuestan 3,00€ el kilo.";
+                    break;
+                case "Mangos":
+                    console.log = "Mangos cuestan 0,56€ el kilo.";
+                    break;
+                case "Papayas":
+                    console.log = "Mangos y papayas cuestan 2,79€ el kilo.";
+                    break;
+                default:
+                    console.log = "Disculpa, no tenemos el tipo de fruta " + tipoFruta + ".";
+            }
+
+            document.getElementById("mostrarFrutaSeleccionada").value = console.log;
+        }
+    </script>
+</body>
+</html>

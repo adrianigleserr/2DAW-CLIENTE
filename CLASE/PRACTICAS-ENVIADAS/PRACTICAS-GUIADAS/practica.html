@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <b>Introduzca un número entre 18 y 99:</b>
+    <input type="text" name="age" size=3 onChange="validate(this, 18, 99);">
+    
+    <input type="button" value="2" onclick="visualizarnumero(this.value)"><br>
+    <input type="text" id="salida">
+
+    <script>
+        function visualizarnumero(dato){
+            document.getElementById("salida").value=dato;
+        }
+
+        function validate(obj, lowval, hival){
+            if ((obj.value < lowval) || (obj.value > hival))
+            alert("¡Valor inválido!");
+        }
+    </script>
+</body>
+</html>

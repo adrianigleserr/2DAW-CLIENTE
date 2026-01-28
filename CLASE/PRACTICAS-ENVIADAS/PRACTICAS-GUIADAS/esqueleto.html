@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>esqueleto</title>
+
+    <script>
+        var cadena="Buenos días \' Para tod@s en \n 2DAW"
+        function visualizar(){
+            
+            document.getElementById("pantalla").value=document.getElementById("entrada");
+        }
+
+    </script>
+</head>
+<body>
+    <label for="">Nombre carro:</label><input type="text" id="entrada"> <br>
+    <input type="button" value="CAMBIAR" onclick="visualizar()"><br>
+    <textarea id="pantalla"></textarea>
+</body>
+</html>

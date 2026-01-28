@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="entradaForm">Introduce un valor numérico:</label>
+    <input type="text" id="entradaForm" name="entradaForm">
+    <input type="submit" value="Comprobar">
+
+    <script>
+        let entrada=prompt("Introduce un valor númerico");
+        alert(isNaN(entrada));
+
+        alert(entrada);
+        if(entrada==null){
+            alert("Operacion Cancelada");
+        } else if ((isNaN(entrada)) || (entrada=="")){
+            alert("No es un número");
+        } else{
+            alert("Es un numero");
+        }
+
+    </script>
+</body>
+</html>
