@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<HTML>
+<head>
+<title>Contador de visitas</title>
+<script language="javascript">
+function actualizarvisitas(){
+if(!localStorage.cuenta){
+localStorage.cuenta = 0;
+}
+localStorage.cuenta = parseInt(localStorage.cuenta) + 1;
+document.getElementById("cuenta").textContent = localStorage.cuenta;
+document.getElementById("contador").value = localStorage.cuenta;
+
+
+}
+
+document.addEventListener("DOMContentLoaded", actualizarvisitas, false)
+
+</script>
+
+</head>
+<body>
+<p>
+Ud. ha visto esta página:
+<span id="cuenta"> muchas </span>
+veces.
+</p>
+<p id="mensaje"> ¡¡¡¡¡Enhorabuena!!!! </p>
+<input type="text" id="contador">
+</body>
+</html>

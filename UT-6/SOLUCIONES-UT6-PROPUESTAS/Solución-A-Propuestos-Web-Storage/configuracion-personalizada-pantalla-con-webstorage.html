@@ -1,0 +1,54 @@
+<html>
+<head><title>Hola</title>
+<script language="javascript">
+
+function inicial(){
+	if (localStorage.texto){
+		document.body.style.color = localStorage.texto;
+		document.body.style.backgroundColor = localStorage.fondo;
+	}else
+		reestablece();
+}
+
+function reestablece(){
+	localStorage.texto = 'red';
+	localStorage.fondo = 'black';
+	colorea();
+}
+
+function alterna(){
+	texto=document.getElementsByTagName('select')[0].value;
+	fondo=document.getElementsByTagName('select')[1].value;
+	localStorage.texto = texto;
+	localStorage.fondo = fondo;
+	colorea();
+}
+
+function colorea(){
+	document.body.style.color = localStorage.texto;
+	document.body.style.backgroundColor = localStorage.fondo;
+}
+
+
+</script>
+</head>
+<body onload="inicial();"> 
+<p>Puede elegir el color de fondo que desea para visualizar nuestra página Web </p><br>
+<select onchange="alterna()">
+  <option value='red'>Rojo</option>
+  <option value='blue'>Azul</option>
+  <option value='green'>Verde</option>
+  <option value='yellow'>Amarillo</option>
+</select>
+<br>
+<p> Elija el color que desea para el texto </p>
+<select onchange="alterna()">
+  <option value='black'>Negro</option>
+  <option value='blue'>Azul</option>
+  <option value='green'>Verde</option>
+  <option value='yellow'>Amarillo</option>
+ </select>
+ <br/><br/>
+<button type='button' onclick='reestablece();'>Reestablece los colores por defecto</button>
+</body>
+</html>

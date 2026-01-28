@@ -1,0 +1,24 @@
+﻿<html>
+    <head>
+        <title>javascript con DOM</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=kTZmz6RG1T4x4csVvE7S0I8lk4qCfV_KY13lAvUbhDaahIN-0mmbFJoybiEAlTUcPYs0XA0g4MRcsQ2vd3JPDMlDhRc3K4Uxjf0aCs-rIEleat3p4um6t5wh865tvD1AC-V86Ua6-EWmtbB8Bs1j7XY9qNL1I0xWTABRVBeuXO-s2vVsUnmoPtoKS8mXe_3HfNCfXEXiqKMBJi7DYUc9hzR_P5bJDSzDEowbuTWKPy0vz7Eo9i1-0u2LsrcidHLwNX6yCxb6rlHq0A5jMbMuWNG1od4SmXMt958Of17U7U-i5ppAQg937-9fqbRqRGdfGnvGgIahIpzGCOcGqiFHt1m5ZN9exT0Jv8JVI5FN2lXwyYKEDma6EuBZ9t0WLtXSOb00e6vrq06sjUckqPFxNK_hwewqOpisXx5_wd6YaWAFPp2IWJQCotrnvPwaQ8lp7GdaQN_PioGmzRuq9z_xKrSRLKcS9nkg-24IKkrcE6JEdXWzIbRasMJi6_bboDztqHrSycfq1ghbdU1piQOvdIkz9CA_6666EcUDnxA3Fzf8ZFBJ5J8e7HIZXtmxnb74blIy3JtqgaCwKKQF4rALHJSCFrY9V8LSI2WSvTMtLfkbDUgkvsoxfhWmdSUuNJrOcviCs_jp3cyWR41RmioxFYKCemXTmVf8AubdsTEiNYfdhW1BY37x7bfqSL-gOUMZQbwPQ74taVw1JNZaBBL5RGL-ETpnBj8_ZJ0y0P3FJQv3N6Uj2AxDRUHgmVobeD5Wjh8xBdDs4n_yN9bB6XB8ergVfC4_fYC8KuCfsnfLryLEnJAD7979xdSDFu93yWlmp078VJvk1-WaoKHXAQ_kAc1hcy55XynwtKdgNvlr6E0PXTICkkGCuqKj4DtN2sGVT9uK7O7M-focJmC2bNZd4yMPctBEFMVJGgoqsQKkPoF8yQhqKj-Zp4o-2yrY-FaSZAnmNW62ZkRgKrGP9AyH3s_OrUXNFKEjxRUdrVAe15RCrNz4J57Hn6t4Qn91pdh0TSroLWq7VW4TgAJoiIc0c8rGk48bb88hZkUGQ0cLP5q0Jr_uVY4ITto-oTgk1ETgSmZOoIhyCjaptOytOvycrdEUOQzhn43fvoNk73Mtg12zvbhEXWf1Elpv5HkHUp5EMk0gPS1lDnu0L6pDILZMrKvdXRkfrGgM7fk1C5xWjrx1djcSYp2Shc422HTr_sRI_7IkcKJXT0y-NJgMNBddyKVxQK8TCW_79D-KEvpEuHAEsAE81NTNE9dfk1rfUxtGkVcUk2vuGY1nSkr1AoUTtgcjalLqKST68DpI0eVqZaizYfjfVWmCGap4Ln8ZfKzD1Dj6bk38WgzFyjVsIKyFqvnNVnOpJPKhuNJM-ctm80WSN97_FS9vMWkVOfYiasvyhmHzo0e-k8GivmmMRtbXjOY_WHR5vm_arQeIHMgO5lqH9kml32Ox6UW-9M5-S04N5ZpN8K6rbnCfvN1llIXVrYTf71rRVlt6tnyPiNvGuPLV9YJJxFfQVQ-nZMn40C-NogwVejNV5ndp3sICf0dVK3hylkAkhboowlQcUX8bL1abiRBikNLoJYaF27U8Brbm4_r-nhuYIpTh5mzLGfZyoSLHyE-ENGr--PA6VQgmZQ-lUWngYEgU1jKuHSgwC9QasONDTAq-VHU66HI-qBK0s79zvgHwaZb98x5zr7T3vEHvyrY8ePbuLHQWkVICMh4m" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9kb2MtMTQtOGctZG9jcy5nb29nbGV1c2VyY29udGVudC5jb20vZG9jcy9zZWN1cmVzYy9vczI4MGx0NjhkdTdqYmpidjExNHJkdmV0amVicmFqZi8xa3RjbDNzNnFvaTFrdW5vZmNzbTg0ZTU0NTZvaTY0Ny8xNjcxMTc2MjUwMDAwLzEwOTI1NDg3ODE0NjQ0NzAwNTA0LzEwOTI1NDg3ODE0NjQ0NzAwNTA0LzEtUVBtWGJHQ05VQlRDTll0X192S3MzS3owZjAwTnd2aj9lPWRvd25sb2FkJmF4PUFMalI4c3lfcUh1LS1NN3RucmxUaC1DTjBJYjh3YTE5LTh3VkVtNHlNREt0MUp1WjZDdWp2TVhnQVlaN2JRdU1TOEc1dGd4dFJjdE1pMlltb3B6TnJoT0FucjdoRG5ySTZEVGVmTU5iUy01Y0pzYmlsOXRYTzFnZDUxYnRhOE42OE9YLWhFNmxwazU0X1hkcGJWdXIwMjNONlJLbERoM1dJeXFhUF9GYzRjNjVEY2NCdDQ5M3NSeGZEV0ptM0hhTmoxbmhxUkh3TWZrVzZYbVFpWGpTYXBUUzRPRl96bzdwZ01PWFZZb2ZNcjY4aHlfUXhIQmFwUGphdUx6NTJYSXlUZjY4NzI3UWVqOTJRTWdsaVdMRmo0cVAzRjBmNnZWVmZjMFBoZU1UaEpqY0h3SjE5OS03MW5SMnNhWDhMbVhmdHRpM2JjQ1lsZk9taXAxMzhSLWF4Q1BMWUpfaXNGNmIyaGwtdU9LejNweElMZ0NmV1FfTGF0dU5iUUVlVTFrZEY0QkJtdlQ2Tm9LcTg2UUlZY250UndfQlRPOGdjX05PU1czUjFjQWdjQ3owVVVCSVRBQ0lyVVRlTVk5MzNIeVJvZlRCanE4NnJUZGJGNFRoXzhrMllOeTFuWlN4NmptMUM5dmFwc2lUMXRIeTBGUGlJNVhFTGVSRlMtcE5kWXVNSUE0WTJON2RSQVcwa3o2U2RYeE9kdVFxYktnQ0V2T1o3dTZGNnFZVklqNC03dC1GdEUyN2JKTXZQby1oMkpyR2VYc01EQ2o0MWtSSV9EeV82NU1DT00ySkgwdEpqTDhZQk1oMmNMUTVrMENKQnlPTkpEclNRdFk4eUk3ejJyb0tmd1R1MTZTSlZ5V190R21sNzR5WlNvRUJYRm1UbzBxV05WWWROSjVBREdTSlZRRHVsZVkxc0JraTZZWHlDcERWV3liUk1NSDdRZlpxY3ZNeEl5RmtlaEtEVDgyQ1l6TkJkalVlRVNXQVJSQlFCUGowVnVKWlIwendSWUNvSzVvMnF2VE5IcnBuWGt1UHBBdktQSjlyXzZyLVdfbkVPamJuVHkwSmNhWGxHSGZxV1FtUDVwbmZ3S2pwY1pHNmJDWVdpeV9FWF9jWEwxeEFfR0k3bE43TjhGaFlpcVhEOTM2RmJUTzN1TXc3emdQWm5FWWhTV3hIT3BrXzgwUGIxdlZkeTR6ODcwQkImdXVpZD1jMTQxYjEwMi0wNWRhLTQyYjItYWU0MC0zNzM0Mjk0NzkwZmEmYXV0aHVzZXI9MCZub25jZT0xbHY1bmI0anFyZzhxJnVzZXI9MTA5MjU0ODc4MTQ2NDQ3MDA1MDQmaGFzaD1kdGlwaDI4b2JubGp1OWxudjFoczJhcW9laGQzaXNpMQ"/></head>
+    <body>
+        <p> Ejemplo de uso del readystate con javascript </p>
+        <script>
+            document.write("<h1>Esto es la cabecera</h1>");
+            document.write("<p>Creando un parrafo</p>");
+        </script>
+        <script>
+	function loaded(){
+                document.write("<p>Cargando el contenido despues de que el documento ha sido cargado</p>");
+            }
+            alert("2do script");
+            if(document.readyState=="complete"){
+                alert("hola");
+                loaded();
+            }
+            
+        </script>
+    </body>
+</html>

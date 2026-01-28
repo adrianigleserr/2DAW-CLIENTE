@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    </head>
+    <style>
+	    #body {
+            background: silver;
+            text-align: justify;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 16px;
+            color: #757E82;
+        }
+
+        #label {
+            /*ordena los input de texto label*/
+            display: inline-block;
+            width: 150px;
+        }
+
+        #header {
+            background: rgb(16, 88, 26);
+            text-align: center;
+            padding: 20px;
+            color: white;
+            text-shadow: black 0.1em 0.1em 0.2em;
+        }
+
+        #container {
+            margin: 0 auto;
+            width: 600px;
+            background: #fff;
+            border: solid 1px;
+            padding: 10px;
+        }
+
+        #content {
+            background: white;
+            clear: left;
+            padding: 30px;
+            
+        }
+
+        #table.colapsado {
+            border-collapse: collapse;
+            border: 2px;
+        }
+
+        #table tr th {
+            background-color: rgb(29, 122, 11);
+            border: solid rgb(37, 49, 45) 1px;
+            padding: 10px;
+            color: black;
+        }
+
+        #tr:nth-child(odd) td {
+            background-color: rgb(214, 214, 214);
+            border: solid rgb(37, 49, 45) 1px;
+            
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        contador = 0;
+        var tituloCapture = "";
+        var autorCapture = "";
+        var editorialCapture = "";
+        var añoPublicacionCapture = "";
+        var signatureCapture = "";
+
+        function capturar() {
+            //constructor de Objeto libro
+            function Libro(titulo, autor, editorial, añoPublicacion, signature) {
+                this.titulo = titulo;
+                this.autor = autor;
+                this.editorial = editorial;
+                this.añoPublicacion = añoPublicacion;
+                this.signature = contador;
+                contador++;
+            }
+
+            //variables con la que se captura los datos de los input de tipo texto
+            tituloCapture = document.getElementById("titulo").value;
+            autorCapture = document.getElementById("autor").value;
+            editorialCapture = document.getElementById("editorial").value;
+            añoPublicacionCapture = document.getElementById("añoPublicacion").value;
+            signatureCapture = document.getElementById("signature").value;
+            
+
+            //variable global u objeto libro
+            nuevoLibro = new Libro(tituloCapture, autorCapture, editorialCapture, añoPublicacionCapture, signatureCapture);
+
+            //console.log(nuevoLibro);
+            agregar();
+            limpiarTabla();
+        }
+
+        //array de objetos 
+        var biblioteca = [];
+        function agregar() {
+            /*funcion que agrega los datos de los objetos al objeto nueva persona 
+            y los almacena en el array biblioteca y los presenta en una tabla*/
+            biblioteca.push(nuevoLibro);
+            console.log(biblioteca);
+
+            /*Aqui muestro el contenido agregado una vez que damos click al boton agregar
+
+            document.getElementById("tabla").innerHTML += '<tbody><tr><td>' + nuevoLibro.titulo + '</td><td>' + nuevoLibro.autor + '</td><td>' + nuevoLibro.editorial + '</td><td>' + nuevoLibro.añoPublicacion + '</td><td>' + nuevoLibro.signature + '</td></tr></tbody>';*/
+        }
+
+        function buscar() {
+           //variables con la que se captura los datos de los input de tipo texto
+            tituloCapture = document.getElementById("titulo").value;
+            autorCapture = document.getElementById("autor").value;
+            editorialCapture = document.getElementById("editorial").value;
+            añoPublicacionCapture = document.getElementById("añoPublicacion").value;
+            signatureCapture = document.getElementById("signature").value; 
+
+            /*Filter
+            El método Filter crea un nuevo arreglo, el cual no busca modificar el valor de los elementos para el nuevo arreglo, únicamente retorna aquellos elementos que cumplan con las condiciones del filtro, los cuales serán almacenados en otro arreglo.*/
+            const buscado = biblioteca.filter(function (element) {
+                
+                if( tituloCapture!=""){
+                    return element.titulo == tituloCapture;
+                }else if(autorCapture!=""){
+                    return element.autor == autorCapture;
+                }else if(editorialCapture!=""){
+                    return element.editorial == editorialCapture;
+                }else if(añoPublicacionCapture!=""){
+                    return element.añoPublicacion == añoPublicacionCapture;
+                }else if(signatureCapture!=""){
+                    return element.signature== signatureCapture;
+                }
+            });
+            
+
+            //console.log(buscado);
+
+            //Tabla con los contenidos
+            var listaLibros = document.getElementById('tabla');
+
+            //Aqui vamos a guardar los tr y td con su informacion.
+            let tablaContent = ``
+
+            //Recorro los libros que coinciden con el dato pasado
+            //El operador in es para obtener el indice, 
+            //en cambio of es el objeto en si.
+            for (const item of buscado) {
+                //utilizamos += para acumular los datos. 
+               
+                tablaContent += `
+            <tr>
+            <td>${item.titulo}</td>
+            <td>${item.autor}</td>
+            <td>${item.editorial}</td>
+            <td>${item.añoPublicacion}</td>
+            <td>${item.signature}</td>
+            </td>
+            `
+            }
+            //Añado el contenido a la tabla
+            listaLibros.innerHTML += tablaContent
+        }
+
+        function limpiarTabla(){
+            var Tbl = document.getElementById('tabla');
+
+            //La propiedad de solo lectura Node.childNodes  devuelve una colección de hijos nodes del elemento dado donde el primer nodo hijo es asignado un índice 0.
+            while(Tbl.childNodes.length>2){
+                Tbl.removeChild(Tbl.lastChild);
+            }
+        }
+
+        
+    </script>
+
+    <h1 id="header">Ingreso libros</h1>
+
+    <form id="container">
+        <div id="content">
+            <label for="">titulo: </label><input type="text" id="titulo"> <br> </br>
+            <label for="">Autor: </label><input type="text" id="autor"> <br> </br>
+            <label for="">Editorial: </label><input type="text" id="editorial"> <br> </br>
+            <label for="">Año Publicacion: </label><input type="text" id="añoPublicacion"> <br> </br>
+            <label for="">Signature: </label><input type="text" id="signature"> <br> </br>
+            <button id="boton" type="reset" onclick="capturar()">Enviar</button>
+            <button id="boton" type="reset" onclick="buscar()">consulta</button>
+        </div>
+    </form>
+
+
+
+    <h1 id="header">Datos Buscado</h1>
+    <div id="container">
+        <div id="content">
+            <table class="colapsado" id="tabla">
+                <thead>
+                    <tr>
+                        <th>titulo</th>
+                        <th>Autor</th>
+                        <th>Editorial</th>
+                        <th>Año Publicación</th>
+                        <th>Signature</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        
+    </div>
+    
+
+
+    <div id="respuestas"></div>
+</body>
+
+</html>
