@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado César</title>
+</head>
+<body>
+    <script>
+        function CifradoPoli() {
+
+            let texto=prompt("Escriba el texto a cifrar");
+            let clave=prompt("Escribe la clave (una serie de numeros)");
+            let i=0;
+            for (let letra of texto){
+                let cifra=letra.charCodeAt(letra)+Number(clave.charAt(i));
+                document.write(String.fromCharCode(cifra));
+                i++;
+                if(i==clave.length) i=0;
+            }
+        }
+    </script>
+</body>
+</html>
