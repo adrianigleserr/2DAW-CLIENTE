@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo creacion de objetos</title>
+</head>
+<body>
+    <h1>Ejemplo creacion de objetos</h1>
+    <input type="button" value="Probar" onclick="ejemploCreaObjeto()">
+    <script type="text/javascript">
+        var msg = "";
+
+        class CuentaBancaria {
+            constructor() {
+                this.nombreTitular = "Nicolas";
+                this.apellidosTitular = "Tesla";
+                this.saldo = "600000";
+            }
+
+            mostrarDatos() {
+                msg = 'Los datos de la cuenta son Nombre: ' + this.nombreTitular;
+                msg = msg + '; Apellidos: ' + this.apellidosTitular + '; Saldo: ' + this.saldo;
+                return msg;
+            }
+        }
+
+        function ejemploCreaObjeto() {
+            let cuenta1 = new CuentaBancaria();
+            // He corregido un pequeño espacio en el texto para que se lea mejor
+            msg = "El saldo de la cuenta bancaria de Tesla es: " + cuenta1.saldo + ' Euros';
+            alert(msg);
+            alert(cuenta1.mostrarDatos());
+        }
+    </script>
+</body>
+</html>

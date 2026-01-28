@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Apertura de multiples ventanas</h1>
+    <input onclick="abrir()" type="button" value="Abrir ventanas">
+    <script languague="JavaScript">
+        function abrir(){
+            var izq = 0;
+            var vert= 0;
+            for (var i=0;i<4;i++){
+                var ventana =window.open(" "," ","witdth=250,height=200,top="+vert+",left="+izq);
+                var texto = "<head><tittle>Ventana "+i+"</title></head><body><h3>Ventana "+i+"</h3><button onclick=abrir()></button></body>";
+                ventana.document.write(texto);
+                izq += 150;
+                vert += 75;
+                ventana = "";
+            }
+        }
+    </script>
+</body>
+</html>

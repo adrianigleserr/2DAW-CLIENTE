@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Ejemplo funcional</p>
+    <button onclick="delayedAlert();">Muestra una caja de alerta despues de cinco segundos</button>
+    <p></p>
+    <button onclick="clearAlert();">Cierra la caja de alerta antes de que ocurra</button>
+    <script>
+        var IDdisparador;
+
+        function delayedAlert(){
+            IDdisparador = window.setTimeout(slowAlert, 5000);
+        }
+
+        function slowAlert(){
+            alert("Que lento transcurre el timepo");
+        }
+
+        function clearAlert(){
+            window.clearTimeout(IDdisparador);
+        }
+    </script>
+</body>
+</html>

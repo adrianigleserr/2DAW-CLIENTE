@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>readyState</title>
+</head>
+<body>
+    <form>
+        <label>Nombre:</label>
+        <input type="text" id="nombre">
+        <br>
+        <label>Apellidos:</label>
+        <input type="text" id="apellidos">
+        <br>
+        <label>Nacimiento:</label>
+        <input type="date" id="nacimiento">
+    </form>
+
+    <script>
+        var nombre;
+        var apellidos;
+        var nacimiento;
+
+        nombre = document.getElementById("nombre");
+        apellidos = document.getElementById("apellidos");
+        nacimiento = document.getElementById("nacimiento"); 
+
+        console.log("Elemento nombre:", nombre);
+        console.log("Elemento apellidos:", apellidos);
+        console.log("Elemento nacimiento:", nacimiento);
+    </script>
+</body>
+</html>

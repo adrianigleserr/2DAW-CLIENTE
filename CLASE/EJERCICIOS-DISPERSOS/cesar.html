@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado César</title>
+</head>
+<body>
+    <h2>Cifrado César</h2>
+
+    <p>Introduce el texto a cifrar:</p>
+    <input type="text" id="texto"><br><br>
+
+    <p>Introduce la clave (número entre 1 y 27):</p>
+    <input type="number" id="clave"><br><br>
+
+    <button onclick="CifradoCesar()">Cifrar</button>
+
+    <h3>Texto cifrado:</h3>
+    <input type="text" id="resultado" readonly style="width: 300px;"><br>
+
+    <script>
+        function CifradoCesar() {
+
+            let texto = document.getElementById("texto").value.toUpperCase();
+            let clave = parseInt(document.getElementById("clave").value);
+            let alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+            let cifrado = "";
+
+            if (isNaN(clave) || clave < 1 || clave > 27) {
+                alert("El número para cifrar debe estar entre 1 y 27");
+                return;
+            }
+            for (let letra of texto) {
+                if (alfabeto.includes(letra)) {
+                    let nuevaPos = (alfabeto.indexOf(letra) + clave) % 27;
+                    cifrado += alfabeto[nuevaPos];
+                } else {
+                    cifrado += letra;
+                }
+            }
+
+            document.getElementById("resultado").value = cifrado;
+        }
+    </script>
+</body>
+</html>
