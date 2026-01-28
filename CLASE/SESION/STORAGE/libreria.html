@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Principal</title>
+</head>
+
+<body>
+
+    <input type="text" id="tit" placeholder="Título"> <br>
+    <input type="text" id="aut" placeholder="Autor"> <br>
+    <input type="text" id="edi" placeholder="Editorial"> <br>
+
+    <button onclick="guardar()">Guardar Datos</button> <br>
+    <button onclick="buscar()">Buscar Título Guardado</button>
+    <button onclick="verPantalla()">Ir a Pantalla 2</button>
+
+    <script>
+        class Libro {
+            constructor(titulo, aut, edi) {
+                this.libro = titulo;
+                this.autor = aut;
+                this.editorial = edi;
+            }
+        }e
+        function guardar() {
+            let nuevoLibro = {
+                libro: document.getElementById("tit").value,
+                autor: document.getElementById("aut").value,
+                editorial: document.getElementById("edi").value
+            };
+            sessionStorage.setItem("librows", JSON.stringify(nuevoLibro));
+        }
+
+        function recuperar() {
+            let datos = sessionStorage.getItem("librows");
+            return datos ? JSON.parse(datos) : null;
+        }
+
+        function buscar() {
+            let tituloBusqueda = document.getElementById("tit").value;
+            let libroGuardado = recuperar();
+
+            if (libroGuardado && libroGuardado.libro == tituloBusqueda) {
+                alert("Libro encontrado: " + libroGuardado.libro);
+            } else {
+                alert("No coincide o no hay datos.");
+            }
+        }
+
+        function verPantalla() {
+            window.location.href = "mostrardatosweb.html";
+        }
+    </script>
+
+</body>
+
+</html>

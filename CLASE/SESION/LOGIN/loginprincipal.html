@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almacenamiento de Usuarios</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Login</h2>
+
+    <input type="text" id="usu" placeholder="Usuario"> <br> <br>
+    <input type="text" id="passw" placeholder="Contraseña"> <br> <br>
+
+    <button onclick="guardar()">Guardar Datos</button>
+
+    <script>
+        class Usuario {
+            constructor(nombre, clave) {
+                this.usuario = nombre;
+                this.contraseña = clave;
+            }
+        }
+        function guardar() {
+            let u = document.getElementById("usu").value;
+            let p = document.getElementById("passw").value;
+
+            let nuevoUsuario = new Usuario(u, p);
+
+            sessionStorage.setItem("usuariosws", JSON.stringify(nuevoUsuario));
+
+            setTimeout(verPantalla,2000);
+        }
+
+        function verPantalla() {
+            window.location.href = "mostrarUsuarios.html";
+        }
+    </script>
+
+</body>
+
+</html>

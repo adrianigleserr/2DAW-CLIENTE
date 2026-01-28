@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Mostrar datos del libro</h2><br><br>
+    <textarea name="pantalla" id=""></textarea>
+    <script>
+        let objetolibro = JSON.parse(sessionStorage.librows);
+        console.log(JSON.parse(sessionStorage.librows));
+        document.getElementsByName("pantalla")[0].value = objetolibro.autor + "\n" +  objetolibro.libro + "\n" +  objetolibro.editorial;
+    </script>
+</body>
+</html>

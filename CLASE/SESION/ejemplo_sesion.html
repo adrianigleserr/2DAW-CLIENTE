@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <td><tr></tr></td>
+    </table>
+    <script>
+        let nombrepar;
+
+        function guardarDatos(){
+            nombrepar = document.getElementById("nombre").value;
+            var datospar = document.getElementById("valor").value;
+            window.sessionStorage.setItem(nombrepar,datospar);
+        }
+
+        function cargarDatos(){
+            var contenedor = document.getElementById("contenido");
+            contenedor.value = nombrepar + " = " + sessionStorage.getItem(nombrepar);
+        }
+    </script>
+</body>
+</html>
