@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Analista de Textos</title>
+</head>
+
+<body>
+    <h2>🔤 Contador de Vocales</h2>
+
+    <label>Escribe una frase:</label><br>
+    <input type="text" id="fraseInput" style="width: 300px;">
+    <br><br>
+
+    <button onclick="analizar()">Analizar Texto</button>
+
+    <h3>Resultados:</h3>
+    <p>Total letras (sin espacios): <b id="totalLetras">0</b></p>
+    <p>Total vocales: <b id="totalVocales">0</b></p>
+
+    <script>
+        function analizar() {
+    // 1. Coge el texto (Corregido el toLowerCase)
+    let textoLetras = document.getElementById('fraseInput').value.toLowerCase(); // <--- FALTABA LA R
+
+    // 2. Crea dos contadores
+    let vocales = 0;
+    let letras = 0;
+
+    // 3. Recorre el texto
+    for (let i = 0; i < textoLetras.length; i++) {
+        
+        let letraActual = textoLetras[i];
+
+        // 4. Contar letras
+        if (letraActual != " ") {
+            letras += 1; // <--- COINCIDE CON LA VARIABLE DE ARRIBA
+        }
+
+        // 5. Contar vocales
+        if ("aeiou".includes(letraActual)) {
+            vocales++; // <--- COINCIDE CON LA VARIABLE DE ARRIBA
+        }
+    }
+
+    // 6. Muestra los resultados
+    // Usamos las mismas variables que hemos ido sumando (letras y vocales)
+    document.getElementById('totalLetras').innerHTML = letras; 
+    document.getElementById('totalVocales').innerHTML = vocales;
+}
+    </script>
+</body>
+
+</html>

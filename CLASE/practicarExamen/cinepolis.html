@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cinepolis</title>
+</head>
+<body>
+    <h2>🎟️ Taquilla Virtual</h2>
+
+    <p>Película: <b>Avatar 2</b> | Edad Mínima: 12 | Entradas: <b id="stockVisual">5</b></p>
+
+    <label>Tu Edad:</label>
+    <input type="number" id="edadInput">
+    <br><br>
+    <button onclick="comprarEntrada()">Comprar Entrada</button>
+
+    <script>
+        let cinepolis = [];
+
+        class Compra {
+            constructor(edad) {
+                this.edad = edad;
+            }
+        }
+
+        function comprarEntrada() {
+            let edad = parseInt(document.getElementById('edadInput').value);
+            let stock = parseInt(document.getElementById('stockVisual').innerHTML);
+
+            if (edad >= 12) {
+                if (stock > 0) {
+                    stock = stock - 1;
+                    
+                    document.getElementById('stockVisual').innerHTML = stock;
+
+                    let nuevaCompra = new Compra(edad);
+                    cinepolis.push(nuevaCompra);
+
+                    alert("Entrada comprada correctamente");
+                    document.getElementById('edadInput').value = "";
+                } else {
+                    alert("Agotadas. No queda stock.");
+                }
+            } else {
+                alert("Edad mínima no superada.");
+            }
+        }
+    </script>
+</body>
+</html>

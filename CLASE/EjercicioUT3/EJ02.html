@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recalcular salario</title>
+    <script>
+        function calcularSalario() {
+            let nombre = prompt("Introduce tu nombre:");
+            let apellidos = prompt("Introduce tus apellidos:");
+            let salario = parseFloat(prompt("Introduce tu salario:"));
+            let edad = parseInt(prompt("Introduce tu edad:"));
+            let nuevoSalario = salario;
+
+            if (salario > 2000) {
+                nuevoSalario = salario;
+            } else if (salario >= 1000 && salario <= 2000) {
+                if (edad > 45) nuevoSalario *= 1.03;
+                else nuevoSalario *= 1.10;
+            } else if (salario < 1000) {
+                if (edad < 30) nuevoSalario = 1100;
+                else if (edad <= 45) nuevoSalario *= 1.03;
+                else nuevoSalario *= 1.15;
+            }
+
+            document.write(`
+    <h2>Resultado:</h2>
+    <p><strong>Nombre:</strong> ${nombre} ${apellidos}</p>
+    <p><strong>Edad:</strong> ${edad}</p>
+    <p><strong>Salario recalculado:</strong> ${nuevoSalario.toFixed(2)} €</p>
+  `);
+        }
+    </script>
+</head>
+
+<body onload="calcularSalario()"></body>
+
+</html>

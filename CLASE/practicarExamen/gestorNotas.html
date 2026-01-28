@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Notas</title>
+</head>
+
+<body>
+    <h2>Gestor de Calificaciones</h2>
+
+    <label>Nombre del Alumno:</label>
+    <input type="text" id="nombre"> <br><br>
+
+    <label>Nota Final:</label>
+    <input type="number" id="nota"> <br><br>
+
+    <button onclick="guardarAlumno()">Guardar Alumno</button>
+    <br><br>
+    <button onclick="mostrarAprobados()">¿Quién ha aprobado?</button>
+<script>
+    let listadoAlumnos = [];
+
+    class Alumno {
+        constructor(nombre, nota) {
+            this.nombre = nombre;
+            this.nota = nota;
+        }
+    }
+
+    function guardarAlumno() {
+        let nombre = document.getElementById('nombre').value;
+        
+        // CORRECCIÓN 1: Convertir a número <--
+        let nota = parseFloat(document.getElementById('nota').value); 
+
+        let nuevoAlumno = new Alumno(nombre, nota);
+        
+        // CORRECCIÓN 2: ¡Meterlo en el array! <--
+        listadoAlumnos.push(nuevoAlumno); 
+
+        // Limpiar inputs
+        document.getElementById('nombre').value = "";
+        document.getElementById('nota').value = "";
+    }
+
+    function mostrarAprobados() {
+        // Recorremos el array
+        for (let i = 0; i < listadoAlumnos.length; i++) {
+            
+            // CORRECCIÓN 3: Acceder al alumno de ESTA vuelta (posición i) <--
+            // Es buena idea guardarlo en una variable temporal para escribir menos
+            let alumnoTemporal = listadoAlumnos[i];
+
+            if (alumnoTemporal.nota >= 5) {
+                console.log("Aprobado: " + alumnoTemporal.nombre);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller FastFix</title>
+</head>
+
+<body>
+    <h1>🔧 Taller Mecánico "FastFix"</h1>
+
+    <label>Matrícula:</label>
+    <input type="text"> <br><br>
+
+    <label>Marca:</label>
+    <input type="text"> <br><br>
+
+    <label>Avería:</label>
+    <input type="text"> <br><br>
+
+    <label>Presupuesto (€):</label>
+    <input type="text"> <br><br>
+
+    <label>Nº Orden (Auto):</label>
+    <input type="text" readonly> <br><br>
+
+    <hr>
+
+    <input type="button" value="Entrada Taller" onclick="registrar()">
+    <input type="button" value="Buscar por Matrícula" onclick="buscar()">
+    <input type="button" value="Limpiar" onclick="limpiar()">
+
+    <script>
+        let tcoches = [];
+        let ncoches = 0;
+
+        class Coche {
+            constructor(matricula, marca, averia, presupuesto, norden) {
+                this.matricula = matricula;
+                this.marca = marca;
+                this.averia = averia;
+                this.presupuesto = presupuesto;
+                this.norden = norden;
+            }
+        }
+
+        function registrar() {
+            let matricula = document.getElementsByTagName('input')[0].value;
+            let marca = document.getElementsByTagName('input')[1].value;
+            let averia = document.getElementsByTagName('input')[2].value;
+            let presupuesto = document.getElementsByTagName('input')[3].value;
+            ncoches++;
+
+            let nuevoCoche = new Coche(matricula, marca, averia, presupuesto, ncoches);
+            tcoches.push(nuevoCoche);
+
+            console.log(tcoches);
+
+            limpiar();
+        }
+
+        function buscar() {
+            let nbuscar = document.getElementsByTagName('input')[0].value;
+            for (let i = 0; i < tcoches.length; i++) {
+                if (tcoches[i].matricula == nbuscar) {
+                    document.getElementsByTagName('input')[0].value = tcoches[i].matricula;
+                    document.getElementsByTagName('input')[1].value = tcoches[i].marca;
+                    document.getElementsByTagName('input')[2].value = tcoches[i].averia;
+                    document.getElementsByTagName('input')[3].value = tcoches[i].presupuesto;
+                    document.getElementsByTagName('input')[4].value = tcoches[i].ncoches;
+                }
+            }
+        }
+
+        function limpiar() {
+            document.getElementsByTagName('input')[0].value = "";
+            document.getElementsByTagName('input')[1].value = "";
+            document.getElementsByTagName('input')[2].value = "";
+            document.getElementsByTagName('input')[3].value = "";
+        }
+
+    </script>
+</body>
+
+</html>

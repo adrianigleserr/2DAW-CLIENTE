@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario Tienda</title>
+</head>
+
+<body>
+    <h1>Alta de Productos</h1>
+
+    <label>Producto:</label>
+    <input type="text" id="nombre"> <br><br>
+
+    <label>Precio:</label>
+    <input type="number" id="precio"> <br><br>
+
+    <label>Stock:</label>
+    <input type="number" id="stock"> <br><br>
+
+    <input type="button" value="Guardar Producto" onclick="guardar()">
+    <input type="button" value="Ver último en consola" onclick="verUltimo()">
+
+    <script>
+        // TU CÓDIGO AQUÍ
+        // 1. Crea un Array llamado 'inventario'.
+        let inventario = [];
+        // 2. Crea la Clase 'Producto' (propiedades: nombre, precio, stock).
+        class Producto {
+            constructor(nombre, precio, stock) {
+                this.nombre = nombre;
+                this.precio = precio;
+                this.stock = stock;
+            }
+        }
+        // 3. Función guardar():
+        function guardar() {
+            //    - Coge los valores del HTML.
+            let nombre = document.getElementById('nombre').value;
+            let precio = document.getElementById('precio').value;
+            let stock = document.getElementById('stock').value;
+            //    - Crea un objeto Producto.
+            let nuevoProducto = new Producto(nombre, precio, stock);
+            //    - Mételo en el array.
+            inventario.push(nuevoProducto);
+            //    - Borra los inputs.
+            document.getElementById('nombre').value = "";
+            document.getElementById('precio').value = "";
+            document.getElementById('stock').value = "";
+        }
+        // 4. Función verUltimo():
+        function verUltimo() {
+            // 1. Declaramos la variable FUERA del bucle para poder usarla luego
+            let ultimoProducto = "";
+
+            for (let i = 0; i < inventario.length; i++) {
+                // 2. Comparamos con '===' (no con '=')
+                // 3. El último índice es length - 1 (no length a secas)
+                if (i === inventario.length - 1) {
+                    ultimoProducto = inventario[i];
+                }
+            }
+
+            // Como la declaramos fuera, ahora sí la ve
+            console.log(ultimoProducto);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Gestión de Nóminas</title>
+</head>
+<body>
+    <h1>Departamento de RRHH</h1>
+
+    <fieldset>
+        <legend>Nuevo Empleado</legend>
+        
+        <label>Nombre y Apellidos:</label>
+        <input type="text" id="nombreInput">
+        <br><br>
+
+        <label>Salario Mensual (€):</label>
+        <input type="number" id="salarioInput">
+        <br><br>
+
+        <button onclick="darDeAlta()">Dar de Alta</button>
+    </fieldset>
+
+    <br><hr><br>
+
+    <button onclick="calcularTotal()">💰 Calcular Gasto Total</button>
+
+    <script>
+        let final = [];
+
+        class Empleado {
+            constructor(nombre,salario){
+                this.nombre = nombre;
+                this.salario = salario;
+            }
+        }
+
+        function darDeAlta(){
+            let nombre = document.getElementById('nombreInput').value;
+            let salario = parseFloat(document.getElementById('salarioInput').value);
+
+            let nuevoEmpleado = new Empleado(nombre,salario);
+            final.push(nuevoEmpleado);
+
+            document.getElementById('nombreInput').value = "";
+            document.getElementById('salarioInput').value = "";
+        }
+
+        function calcularTotal(){
+            let salarioTotal = 0;
+            for (let i = 0;i < final.length; i++){
+                salarioTotal = salarioTotal + final[i].salario;
+            }
+            console.log(salarioTotal);
+        }      
+    </script>
+</body>
+</html>

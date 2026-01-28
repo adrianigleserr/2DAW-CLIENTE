@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Factorial</title>
+    <script>
+        function factorial(n) {
+            if (n < 0) return "No existe el factorial de un número negativo.";
+            let resultado = 1;
+            for (let i = 1; i <= n; i++) resultado *= i;
+            return resultado;
+        }
+
+        function pedirNumero() {
+            let num = parseInt(prompt("Introduce un número para calcular su factorial:"));
+            if (isNaN(num)) alert("Debes introducir un número válido.");
+            else alert(`El factorial de ${num} es ${factorial(num)}`);
+        }
+    </script>
+</head>
+
+<body onload="pedirNumero()"></body>
+
+</html>

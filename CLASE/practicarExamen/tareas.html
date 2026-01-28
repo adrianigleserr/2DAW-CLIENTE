@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Tareas</title>
+</head>
+
+<body>
+    <h2>Nueva Tarea</h2>
+
+    <label>Descripción:</label>
+    <input type="text" id="desc"> <br><br>
+
+    <label>Prioridad:</label>
+    <select id="prioridad">
+        <option value="Normal">Normal</option>
+        <option value="Urgente">Urgente</option>
+    </select>
+    <br><br>
+
+    <button onclick="agregarTarea()">Agregar a la lista</button>
+    <button onclick="verUrgentes()">Ver solo Urgentes</button>
+
+    <script>
+    let listaTareas = [];
+
+    class Tarea {
+        constructor(descripcion, prioridad) {
+            this.descripcion = descripcion;
+            this.prioridad = prioridad;
+        }
+    }
+
+    function agregarTarea() {
+        let descripcion = document.getElementById('desc').value;
+        
+        // CORRECCIÓN 1: Usamos getElementById también para el select <--
+        let prioridad = document.getElementById('prioridad').value;
+
+        let nuevaTarea = new Tarea(descripcion, prioridad);
+        
+        // ¡PERFECTO EL PUSH! ✅
+        listaTareas.push(nuevaTarea);
+
+        // Limpiar
+        document.getElementById('desc').value = "";
+        // Para limpiar el select, solemos ponerlo en el primer valor por defecto
+        document.getElementById('prioridad').value = "Normal"; 
+    }
+
+    function verUrgentes() {
+        for (let i = 0; i < listaTareas.length; i++) {
+            
+            // CORRECCIÓN 2: Accedemos a .prioridad y usamos comillas "" <--
+            if (listaTareas[i].prioridad == "Urgente") {
+                console.log(listaTareas[i].descripcion);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

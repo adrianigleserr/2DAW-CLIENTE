@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comprobar número</title>
+    <script>
+        function comprobarNumero() {
+            let valor = prompt("Introduce un número:");
+            if (valor === null) return; // Si cancela
+            if (isNaN(valor) || valor.trim() === "") {
+                alert("No has introducido un número válido.");
+            } else {
+                alert("Has introducido el número: " + valor);
+            }
+        }
+    </script>
+</head>
+
+<body onload="comprobarNumero()"></body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzería Luigi (Versión TagName)</title>
+</head>
+<body>
+    <h1>🍕 Pizzería Luigi</h1>
+
+    <label>Precio de la Pizza (€):</label>
+    <input type="number"> <br><br>
+    
+    <p>Selecciona el tamaño:</p>
+    
+    <input type="radio" name="tamano"> Pequeña (Sin coste extra) <br>
+    <input type="radio" name="tamano"> Mediana (+2€) <br>
+    <input type="radio" name="tamano"> Familiar (+5€) <br>
+
+    <br><hr><br>
+
+    <button onclick="calcularCuenta()">🧾 Calcular Cuenta</button>
+
+    <h3>Total a Pagar: <b>-</b> €</h3>
+
+    <script>
+        // Ponemos un valor por defecto al precio (Opcional, está bien pensado)
+        document.getElementsByTagName('input')[0].value = 10;
+
+        function calcularCuenta() {
+            // 1. Cogemos el precio base del input [0]
+            let precioFinal = parseFloat(document.getElementsByTagName('input')[0].value);
+
+            // 2. Miramos los Radios
+            // No miro el [1] (Pequeña) porque suma 0.
+            
+            // ¿Está marcada la Mediana? (Input [2])
+            if (document.getElementsByTagName('input')[2].checked) {
+                precioFinal = precioFinal + 2;
+            } 
+            // ¿Está marcada la Familiar? (Input [3])
+            else if (document.getElementsByTagName('input')[3].checked) {
+                precioFinal = precioFinal + 5;
+            }
+
+            // 3. Mostramos el resultado en la etiqueta <b> (que es la [0])
+            document.getElementsByTagName('b')[0].innerHTML = precioFinal;
+        }
+    </script>
+</body>
+</html>

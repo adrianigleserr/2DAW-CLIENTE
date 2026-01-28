@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Triángulo de asteriscos</title>
+    <script>
+        function generarTriangulo() {
+            let filas = parseInt(prompt("Introduce el número de filas del triángulo:"));
+            let salida = "";
+            for (let i = 1; i <= filas; i++) {
+                salida += "*".repeat(i) + "<br>";
+            }
+            document.write(`<pre>${salida}</pre>`);
+        }
+    </script>
+</head>
+
+<body onload="generarTriangulo()"></body>
+
+</html>

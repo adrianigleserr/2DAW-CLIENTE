@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas de Clase</title>
+</head>
+
+<body>
+    <h1>📊 Calculadora de Notas</h1>
+
+    <label>Introduce nota:</label>
+    <input type="number" id="notaInput">
+    <button onclick="anadir()">Añadir Nota</button>
+
+    <br><hr><br>
+
+    <button onclick="calcular()">Calcular Estadísticas</button>
+
+    <h3>Resultados:</h3>
+    <p>Nota Media: <b id="resMedia">-</b></p>
+    <p>Nota Máxima: <b id="resMaxima">-</b></p>
+
+    <script>
+        let notasTotales = [];
+        
+        // CORRECCIÓN 1: Quitamos la 'ñ' para que coincida con el HTML
+        function anadir() {
+            let nota = parseFloat(document.getElementById('notaInput').value);
+            notasTotales.push(nota);
+
+            document.getElementById('notaInput').value = "";
+            console.log(notasTotales); // Opcional: para ver que funciona
+        }
+
+        function calcular() {
+            let notasSumadas = 0;
+            let notaMaxima = 0; 
+            let notaMedia = 0;
+
+            for (let i = 0; i < notasTotales.length; i++) {
+                notasSumadas += notasTotales[i];
+                
+                if (notasTotales[i] > notaMaxima){
+                    notaMaxima = notasTotales[i];
+                }
+            }
+
+            // Calculamos la media al final
+            notaMedia = notasSumadas / notasTotales.length;
+
+            // CORRECCIÓN 2: Usamos .innerHTML porque son etiquetas <b>
+            document.getElementById('resMedia').innerHTML = notaMedia;
+            document.getElementById('resMaxima').innerHTML = notaMaxima;
+        }
+    </script>
+</body>
+</html>

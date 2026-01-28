@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Gimnasio</title>
+</head>
+
+<body>
+    <h1>💪 Gimnasio "El Fuerte"</h1>
+
+    <label>Nombre:</label>
+    <input type="text">
+    <br><br>
+
+    <label>Apellidos:</label>
+    <input type="text">
+    <br><br>
+
+    <label>DNI:</label>
+    <input type="text">
+    <br><br>
+
+    <label>Cuota (€):</label>
+    <input type="text">
+    <br><br>
+
+    <label>Nº Socio (Auto):</label>
+    <input type="text" readonly>
+    <br><br>
+
+    <input type="button" value="Inscribir Socio" onclick="inscribir()">
+    <input type="button" value="Buscar por Nombre" onclick="buscar()">
+    <input type="button" value="Limpiar" onclick="limpiar()">
+
+    <script>
+        class Socio {
+            constructor(nombre, apellidos, dni, cuota, nsocio) {
+                this.nombre = nombre;
+                this.apellidos = apellidos,
+                this.dni = dni;
+                this.cuota = cuota;
+                this.nsocio = nsocio;
+            }
+        }
+        let inscritos = [];
+        let nsocio = 0;
+        function inscribir() {
+
+
+            let nombre = document.getElementsByTagName('input')[0].value;
+            let apellidos = document.getElementsByTagName('input')[1].value;
+            let dni = document.getElementsByTagName('input')[2].value;
+            let cuota = parseFloat(document.getElementsByTagName('input')[3].value);
+            nsocio += 1;
+
+            let nuevoSocio = new Socio(nombre, apellidos, dni, cuota,nsocio);
+            inscritos.push(nuevoSocio);
+
+            console.log(inscritos);
+
+            document.getElementsByTagName('input')[0].value = "";
+            document.getElementsByTagName('input')[1].value = "";
+            document.getElementsByTagName('input')[2].value = "";
+            document.getElementsByTagName('input')[3].value = "";
+
+        }
+
+        function buscar() {
+            let socioBuscar = document.getElementsByTagName('input')[0].value;
+            for (let i = 0; i < inscritos.length; i++) {
+                if (inscritos[i].nombre == socioBuscar) {
+                    document.getElementsByTagName('input')[0].value = inscritos[i].nombre;
+                    document.getElementsByTagName('input')[1].value = inscritos[i].apellidos;
+                    document.getElementsByTagName('input')[2].value = inscritos[i].dni;
+                    document.getElementsByTagName('input')[3].value = inscritos[i].cuota;
+                    document.getElementsByTagName('input')[4].value = inscritos[i].nsocio;
+                }
+            }
+        }
+
+        function limpiar() {
+            document.getElementsByTagName('input')[0].value = "";
+            document.getElementsByTagName('input')[1].value = "";
+            document.getElementsByTagName('input')[2].value = "";
+            document.getElementsByTagName('input')[3].value = "";
+        }
+    </script>
+</body>
+
+</html>

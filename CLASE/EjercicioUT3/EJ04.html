@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Adivina el número</title>
+    <script>
+        function adivinarNumero() {
+            const numero = Math.floor(Math.random() * 1000) + 1;
+            let intentos = 0;
+            let adivinado = false;
+
+            while (!adivinado) {
+                let entrada = prompt("Adivina el número entre 1 y 1000 (o escribe 'salir' para terminar):");
+                if (entrada === null || entrada.toLowerCase() === "salir") {
+                    alert(`Has salido del juego. El número era ${numero}.`);
+                    return;
+                }
+                let intento = parseInt(entrada);
+                if (isNaN(intento)) {
+                    alert("Introduce un número válido.");
+                    continue;
+                }
+                intentos++;
+                if (intento === numero) {
+                    alert(`¡Correcto! El número era ${numero}. Lo lograste en ${intentos} intentos.`);
+                    break;
+                } else if (intento < numero) {
+                    alert("El número es mayor.");
+                } else {
+                    alert("El número es menor.");
+                }
+            }
+
+            if (confirm("¿Quieres jugar otra vez?")) adivinarNumero();
+        }
+    </script>
+</head>
+
+<body onload="adivinarNumero()"></body>
+
+</html>

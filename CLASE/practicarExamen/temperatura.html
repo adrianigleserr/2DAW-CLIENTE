@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Termostato JS</title>
+</head>
+<body>
+    <h1>🌡️ Termostato</h1>
+
+    <label>Temperatura Actual (ºC):</label>
+    <input type="number" id="tempInput">
+    <button onclick="comprobar()">Ver Estado</button>
+
+    <br><br>
+
+    <div id="cajaResultado" style="border: 1px solid black; padding: 20px; width: 200px;">
+        Esperando datos...
+    </div>
+
+    <script>
+        function comprobar() {
+            // TU CÓDIGO AQUÍ
+            // 1. Coge la temperatura (parseFloat).
+            let temperatura = parseFloat(document.getElementById('tempInput').value);
+            // 2. Haz IF / ELSE IF para comprobar los rangos.
+            if (temperatura > 25){
+                document.getElementById('cajaResultado').innerHTML = "Hace Calor";
+            } else if ( temperatura > 10){
+                document.getElementById('cajaResultado').innerHTML = "Temperatura Ideal";
+            } else {
+                document.getElementById('cajaResultado').innerHTML = "Hace Frio";
+            }          
+        }
+    </script>
+</body>
+</html>
