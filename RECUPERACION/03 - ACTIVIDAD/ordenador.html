@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Ordenadores</title>
+</head>
+<body>
+    <h2>Crear Ordenador</h2>
+    <label>Marca (obligatorio): <input type="text" id="marca"></label><br><br>
+    <label>Modelo (obligatorio): <input type="text" id="modelo"></label><br><br>
+    <label>RAM (GB): <input type="number" id="ram" placeholder="Por defecto: 8"></label><br><br>
+    <label>Disco Duro HD (GB): <input type="number" id="hd" placeholder="Por defecto: 1024"></label><br><br>
+    <label>Pantalla (Pulgadas): <input type="number" id="pantalla" placeholder="Por defecto: 17"></label><br><br>
+    
+    <button id="btnCrear">Generar Listado</button>
+    
+    <p id="resultado"></p>
+
+    <script>
+        // 1. Definición del Objeto (Clase)
+        class Ordenador {
+            // El constructor aplica los valores por defecto si no le pasamos los datos
+            constructor(marca, modelo, ram = 8, hd = 1024, pantalla = 17) {
+                this.marca = marca;
+                this.modelo = modelo;
+                this.ram = ram;
+                this.hd = hd;
+                this.pantalla = pantalla;
+            }
+
+            // Método Listado
+            Listado() {
+                return `Ordenador ${this.marca} ${this.modelo}: ${this.ram}GB de RAM, disco duro de ${this.hd}GB y pantalla de ${this.pantalla} pulgadas.`;
+            }
+        }
+
+        // 2. Lógica de la interfaz
+        window.onload = function() {
+            document.getElementById('btnCrear').addEventListener('click', function() {
+                let marca = document.getElementById('marca').value;
+                let modelo = document.getElementById('modelo').value;
+                
+                // Validamos que los campos obligatorios estén llenos
+                if (marca.trim() === "" || modelo.trim() === "") {
+                    alert("La marca y el modelo son obligatorios.");
+                    return; // Cortamos la ejecución si faltan datos
+                }
+
+                // Capturamos los números. Si el usuario no escribe nada, forzamos a que sea 'undefined' 
+                // para que el constructor de la clase aplique los valores por defecto automáticamente.
+                let ram = document.getElementById('ram').value ? parseInt(document.getElementById('ram').value) : undefined;
+                let hd = document.getElementById('hd').value ? parseInt(document.getElementById('hd').value) : undefined;
+                let pantalla = document.getElementById('pantalla').value ? parseInt(document.getElementById('pantalla').value) : undefined;
+
+                // Instanciamos el objeto con los datos
+                let miPc = new Ordenador(marca, modelo, ram, hd, pantalla);
+
+                // Mostramos el resultado llamando al método Listado()
+                document.getElementById('resultado').innerText = miPc.Listado();
+            });
+        };
+    </script>
+</body>
+</html>

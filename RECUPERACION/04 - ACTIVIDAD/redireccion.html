@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Conectando...</title>
+</head>
+<body>
+    <h2 id="mensaje">Conectando con la página segura......</h2>
+
+    <script>
+        window.onload = function() {
+            // El enunciado pide esperar 7 segundos (7000 milisegundos)
+            setTimeout(function() {
+                // El objeto 'location.href' nos permite redirigir al usuario
+                // Es importante poner http:// o https:// para que no busque la web en tu disco duro local
+                window.location.href = "http://www.iestetuan.es";
+            }, 7000);
+        };
+    </script>
+</body>
+</html>

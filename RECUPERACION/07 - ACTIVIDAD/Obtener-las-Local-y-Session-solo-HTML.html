@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ejemplo de almacenamiento local con HTML5</title>
+	<style type="text/css">
+		body {
+			font-family: sans-serif;
+		}
+
+		span#mensajes {
+			color: blue;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>EJEMPLO DE ALMACENAMIENTO LOCAL CON HTML5</h1>
+
+	<span id="mensajes"></span><br /><br />
+	AREA DE ALMACENAMIENTO:
+	<select id="tipo">
+		<option value="local">LOCAL</option>
+		<option value="sesion">SESION</option>
+	</select><br />
+	CLAVE: <input type="text" id="clave" /><br />
+	VALOR: <input type="text" id="valor" /><br /><br />
+	<button>GUARDAR</button>
+	<button>ELIMINAR</button>
+	<button>REFRESCAR</button>
+	<button>COMPROBAR COMPATIBILIDAD DEL NAVEGADOR</button>
+
+	<br /><br />
+	<table>
+		<tr>
+			<td>
+				CLAVES Y VALORES EN LOCAL STORAGE:<br />
+				<textarea rows="10" cols="50" id="almacenamientoLocal" readonly="readonly"></textarea>
+			</td>
+			<td>
+				CLAVES Y VALORES EN SESSION STORAGE:<br />
+				<textarea rows="10" cols="50" id="almacenamientoSesion" readonly="readonly"></textarea>
+			</td>
+		</tr>
+	</table>
+	<p>Puedes probar a guardar valores con almacenamiento local y de sesi&oacute;n, cierra y abre el navegador o la
+		pesta&ntilde;a y observar&aacute;s que se pierden los datos almacenados en sesi&oacute;n pero no los locales.
+	</p>
+	<p>Tambi&eacute;n puedes probar a abrir dos ventanas guardar valores con almacenamiento local en una de ellas y ver
+		como aparecen en la otra (por desgracia no funciona en Internet Explorer).</p>
+
+	<script type="text/javascript">
+		window.onload = function () {
+			// 1. CAPTURAMOS LOS ELEMENTOS DEL DOM
+			let tipoAlmacenamiento = document.getElementById("tipo");
+			let inputClave = document.getElementById("clave");
+			let inputValor = document.getElementById("valor");
+			let txtLocal = document.getElementById("almacenamientoLocal");
+			let txtSesion = document.getElementById("almacenamientoSesion");
+			let spanMensajes = document.getElementById("mensajes");
+
+			// Como los botones no tienen ID, cogemos todos los de la página.
+			// Sabemos que el 0 es Guardar, el 1 Eliminar, el 2 Refrescar y el 3 Compatibilidad.
+			let botones = document.getElementsByTagName("button");
+			let btnGuardar = botones[0];
+			let btnEliminar = botones[1];
+			let btnRefrescar = botones[2];
+			let btnCompatibilidad = botones[3];
+
+			let temporizador; // Variable para los 3 segundos
+
+			// 2. FUNCIÓN PARA EL MENSAJE TEMPORIZADO
+			function mostrarMensaje(texto) {
+				spanMensajes.innerHTML = texto;
+
+				// Limpiamos la cuenta atrás anterior por si el usuario hace clics muy rápidos
+				clearTimeout(temporizador);
+
+				// Borramos el mensaje a los 3000 milisegundos (3 segundos)
+				temporizador = setTimeout(function () {
+					spanMensajes.innerHTML = "";
+				}, 3000);
+			}
+
+			// 3. FUNCIÓN PARA VOLCAR LOS DATOS EN LOS TEXTAREAS
+			function refrescarTextareas() {
+				// Vaciamos las cajas primero
+				txtLocal.value = "";
+				txtSesion.value = "";
+
+				// Leemos Local Storage
+				for (let i = 0; i < localStorage.length; i++) {
+					let c = localStorage.key(i);
+					let v = localStorage.getItem(c);
+					txtLocal.value += c + "=" + v + "\n";
+				}
+
+				// Leemos Session Storage
+				for (let i = 0; i < sessionStorage.length; i++) {
+					let c = sessionStorage.key(i);
+					let v = sessionStorage.getItem(c);
+					txtSesion.value += c + "=" + v + "\n";
+				}
+			}
+
+			// 4. EVENTOS DE LOS BOTONES
+			btnGuardar.addEventListener("click", function () {
+				let clave = inputClave.value.trim();
+				let valor = inputValor.value.trim();
+				let tipo = tipoAlmacenamiento.value; // Será "local" o "sesion"
+
+				if (clave === "") {
+					mostrarMensaje("Error: Debes indicar una clave.");
+					return;
+				}
+
+				if (tipo === "local") {
+					localStorage.setItem(clave, valor);
+				} else {
+					sessionStorage.setItem(clave, valor);
+				}
+
+				refrescarTextareas();
+				mostrarMensaje("Valor guardado " + clave + "=" + valor + " con area de almacenamiento " + tipo);
+			});
+
+			btnEliminar.addEventListener("click", function () {
+				let clave = inputClave.value.trim();
+				let tipo = tipoAlmacenamiento.value;
+
+				if (clave === "") {
+					mostrarMensaje("Error: Indica la clave a eliminar.");
+					return;
+				}
+
+				if (tipo === "local") {
+					localStorage.removeItem(clave);
+				} else {
+					sessionStorage.removeItem(clave);
+				}
+
+				refrescarTextareas();
+				mostrarMensaje("Clave '" + clave + "' eliminada del almacenamiento " + tipo);
+			});
+
+			btnRefrescar.addEventListener("click", function () {
+				refrescarTextareas();
+				mostrarMensaje("Pantalla refrescada.");
+			});
+
+			btnCompatibilidad.addEventListener("click", function () {
+				if (typeof (Storage) !== "undefined") {
+					mostrarMensaje("Tu navegador SÍ es compatible con Web Storage.");
+				} else {
+					mostrarMensaje("Tu navegador NO es compatible con Web Storage.");
+				}
+			});
+
+			// 5. CARGA INICIAL
+			// Llenamos las cajas al abrir la página por si había datos guardados de antes
+			refrescarTextareas();
+		};
+	</script>
+</body>
+
+</html>

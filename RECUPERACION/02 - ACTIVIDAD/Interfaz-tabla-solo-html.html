@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de tablas con opciones</title>
+</head>
+<body>
+    <table><tr><td>
+        <h4>Número Filas</h4><br>
+        <select name="" id="nrofilas">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
+    </td><td>    </td><td>
+        <h4>Borde</h4><br>
+        <input type="radio" name="borde" value="0,5">0,5
+        <input type="radio" name="borde" value="1">1
+        <input type="radio" name="borde" value="2">2
+    </td></tr>
+    <tr><td>
+        <h4>Número Columnas</h4><br>
+        <select name="" id="">
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="8">8</option>
+            <option value="10">10</option>
+        </select>
+    </td><td>    </td><td>
+        <h4>Color</h4><br>
+        <input type="radio" name="color" value="black">Negro
+        <input type="radio" name="color" value="red">Rojo
+        <input type="radio" name="color" value="green">Verde
+    </td></tr>       
+    </table>
+    <div id="visualizador"></div>
+
+    <script>
+    // ==========================================
+    // VERSIÓN 1: MÉTODOS "OBJECT ELEMENT" (DOM)
+    // ==========================================
+    // Fíjate en cómo se ponen los valores por defecto directamente en los parámetros
+    function crearTablaDOM(filas = 10, columnas = 4, color = "black") {
+        let tabla = document.createElement("table");
+        
+        // Estilos de la tabla (borde exterior de 3px y ancho del 100%)
+        tabla.style.width = "100%";
+        tabla.style.border = "3px solid " + color;
+        // borderCollapse fusiona los bordes para que no se vean dobles
+        tabla.style.borderCollapse = "collapse"; 
+        tabla.style.marginBottom = "20px"; // Separación para que no se peguen las 10 tablas
+
+        for (let i = 0; i < filas; i++) {
+            let tr = document.createElement("tr");
+            
+            for (let j = 0; j < columnas; j++) {
+                let td = document.createElement("td");
+                // Borde interior de 1px
+                td.style.border = "1px solid " + color;
+                // Le ponemos un espacio irrompible para que la celda no colapse al estar vacía
+                td.innerHTML = "&nbsp;"; 
+                tr.appendChild(td);
+            }
+            tabla.appendChild(tr);
+        }
+        
+        return tabla;
+    }
+
+    // ==========================================
+    // VERSIÓN 2: INYECCIÓN DE CÓDIGO HTML
+    // ==========================================
+    function crearTablaHTML(filas = 10, columnas = 4, color = "black") {
+        let html = `<table style="width: 100%; border: 3px solid ${color}; border-collapse: collapse; margin-bottom: 20px;">`;
+        
+        for (let i = 0; i < filas; i++) {
+            html += `<tr>`;
+            for (let j = 0; j < columnas; j++) {
+                html += `<td style="border: 1px solid ${color};">&nbsp;</td>`;
+            }
+            html += `</tr>`;
+        }
+        
+        html += `</table>`;
+        return html;
+    }
+
+    window.onload = function() {
+        let visualizador = document.getElementById("visualizador");
+        let tablaPrincipal = crearTablaDOM(10, 4, "black");
+        visualizador.appendChild(tablaPrincipal);
+        visualizador.appendChild(document.createElement("hr"));
+        for (let i = 0; i < 10; i++) {
+            let tablaVerde = crearTablaDOM(5, 4, "green");
+            visualizador.appendChild(tablaVerde);
+        }
+    };
+</script>
+</body>
+</html>

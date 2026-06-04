@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de Velocidad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #marcador {
+            font-size: 4em;
+            font-weight: bold;
+            color: #333;
+        }
+        .instrucciones {
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="marcador">Velocidad 0</div>
+    <div class="instrucciones">Usa las flechas &uarr; y &darr; del teclado</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const marcador = document.getElementById('marcador');
+            let velocidad = 0; // Inicializamos la velocidad
+
+            document.addEventListener('keydown', function(evento) {
+                // Comprobamos qué tecla se ha pulsado
+                if (evento.key === "ArrowUp") {
+                    velocidad++; // Incrementa en uno
+                } else if (evento.key === "ArrowDown") {
+                    velocidad--; // Decrementa en uno
+                }
+
+                // Aseguramos los límites (ni menor de 0, ni mayor de 120)
+                // Math.max asegura que el mínimo sea 0. Math.min asegura que el máximo sea 120.
+                velocidad = Math.max(0, Math.min(120, velocidad));
+
+                // Actualizamos el texto en pantalla
+                marcador.textContent = `Velocidad ${velocidad}`;
+            });
+        });
+    </script>
+</body>
+</html>

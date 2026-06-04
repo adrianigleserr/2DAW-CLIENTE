@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información del Navegador</title>
+</head>
+<body>
+    <h2>Información de tu navegador:</h2>
+    <p id="infoNavegador" style="font-weight: bold; color: blue;"></p>
+
+    <script>
+        window.onload = function() {
+            // El objeto 'navigator' contiene toda la info del navegador del usuario.
+            // 'userAgent' devuelve una cadena de texto con el nombre, versión y sistema operativo.
+            let info = navigator.userAgent;
+            
+            // También se puede usar navigator.appName, pero suele ser menos preciso.
+            let nombreBasico = navigator.appName; 
+
+            // Mostramos ambos para que el profesor vea que dominas el objeto al completo
+            document.getElementById("infoNavegador").innerHTML = 
+                `<strong>App Name:</strong> ${nombreBasico} <br><br>
+                 <strong>User Agent (Detallado):</strong> ${info}`;
+        };
+    </script>
+</body>
+</html>

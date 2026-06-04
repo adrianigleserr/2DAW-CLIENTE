@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cifrado estilo César</title>
+</head>
+
+<body>
+	<h3>IMPLEMENTACIÓN DE CIFRADO CÉSAR</h3><br>
+	<label for="">Texto de entrada</label><br><textarea name="entrada" cols="30" rows="10"></textarea><br><br>
+	<label for="">Clave de cifrado</label><input type="text" name="clave"><br><br>
+	<label for="">Texto de salida</label><br><textarea name="salida" cols="30" rows="10"></textarea>
+	<script>
+		window.onload = function () {
+			let cajaEntrada = document.querySelector('textarea[name="entrada"]');
+			let inputClave = document.querySelector('input[name="clave"]');
+			let cajaSalida = document.querySelector('textarea[name="salida"]');
+			function cifrarTexto() {
+				let texto = cajaEntrada.value;
+				let clave = parseInt(inputClave.value) || 0;
+				let textoCifrado = "";
+				for (let i = 0; i < texto.length; i++) {
+					let codigoUnicode = texto.charCodeAt(i);
+					let nuevaLetra = String.fromCharCode(codigoUnicode + clave);
+					textoCifrado += nuevaLetra;
+				}
+				cajaSalida.value = textoCifrado;
+			}
+			cajaEntrada.addEventListener('input', cifrarTexto);
+			inputClave.addEventListener('input', cifrarTexto);
+		};
+	</script>
+</body>
+
+</html>

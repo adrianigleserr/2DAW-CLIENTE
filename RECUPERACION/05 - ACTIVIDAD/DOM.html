@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulando el DOM</title>
+</head>
+<body>
+    <main id="principal">
+        <p>Soy el primer párrafo</p>
+        <p>soy el segundo párrafo</p>
+        <p>Soy el tercer párrafo</p>
+    </main>
+    
+    <br><br><br>
+    
+    <input type="button" value="Modificar" id="boton">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Capturamos el botón y el contenedor principal
+            const boton = document.getElementById("boton");
+            const principal = document.getElementById("principal");
+            
+            // Inicializamos nuestro contador de clics
+            let contadorPulsaciones = 0;
+
+            boton.addEventListener("click", function() {
+                contadorPulsaciones++;
+                
+                // Obtenemos la lista de párrafos actual en cada clic
+                const parrafos = principal.querySelectorAll("p");
+
+                if (contadorPulsaciones === 1) {
+                    // 1ª Pulsación: Agrega un párrafo al final
+                    let nuevoP = document.createElement("p");
+                    nuevoP.textContent = "Soy el nuevo párrafo";
+                    principal.appendChild(nuevoP);
+
+                } else if (contadorPulsaciones === 2) {
+                    // 2ª Pulsación: Agrega un párrafo intermedio entre el 1º y el 2º original
+                    let pIntermedio = document.createElement("p");
+                    pIntermedio.textContent = "Soy el nuevo párrafo intermedio";
+                    // Insertamos antes del párrafo que originalmente era el segundo (índice 1)
+                    principal.insertBefore(pIntermedio, parrafos[1]);
+
+                } else if (contadorPulsaciones === 3) {
+                    // 3ª Pulsación: Reemplaza "soy el segundo párrafo" por uno suplente
+                    let pSuplente = document.createElement("p");
+                    pSuplente.textContent = "Soy el párrafo suplente, el que reemplaza al párrafo etiquetado como segundo";
+                    
+                    // Buscamos cuál es el párrafo exacto por su texto
+                    parrafos.forEach(p => {
+                        if (p.textContent === "soy el segundo párrafo") {
+                            principal.replaceChild(pSuplente, p);
+                        }
+                    });
+
+                } else if (contadorPulsaciones === 4) {
+                    // 4ª Pulsación: Elimina "Soy el tercer párrafo"
+                    parrafos.forEach(p => {
+                        if (p.textContent === "Soy el tercer párrafo") {
+                            principal.removeChild(p);
+                        }
+                    });
+                    
+                    // Desactivamos el botón tras cumplir todas las fases pedidas
+                    boton.disabled = true; 
+                }
+            });
+        });
+    </script>
+</body>
+</html>

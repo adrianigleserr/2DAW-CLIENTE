@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Propiedades de la Ventana</title>
+</head>
+<body>
+    <h2>Propiedades actuales de la ventana:</h2>
+    <ul id="propiedades"></ul>
+
+    <hr>
+    
+    <h2>Modificar Ventana</h2>
+    <label>Coordenada X / Ancho: <input type="number" id="valorX"></label><br><br>
+    <label>Coordenada Y / Alto: <input type="number" id="valorY"></label><br><br>
+    
+    <button id="btnMover">Mover Ventana</button>
+    <button id="btnRedimensionar">Modificar Tamaño</button>
+
+    <script>
+        window.onload = function() {
+            // 1. OBTENER Y MOSTRAR PROPIEDADES DE LA VENTANA
+            let lista = document.getElementById("propiedades");
+            
+            // Recopilamos las propiedades del BOM (objeto window)
+            let datosVentana = [
+                `screenX / screenLeft: ${window.screenX} / ${window.screenLeft}`,
+                `screenY / screenTop: ${window.screenY} / ${window.screenTop}`,
+                `innerWidth: ${window.innerWidth}`,
+                `innerHeight: ${window.innerHeight}`,
+                `outerWidth: ${window.outerWidth}`,
+                `outerHeight: ${window.outerHeight}`
+            ];
+
+            // Las inyectamos en la lista HTML
+            datosVentana.forEach(dato => {
+                let li = document.createElement("li");
+                li.textContent = dato;
+                lista.appendChild(li);
+            });
+
+            // 2. LÓGICA DE LOS BOTONES
+            document.getElementById("btnMover").addEventListener("click", function() {
+                let x = parseInt(document.getElementById("valorX").value) || 0;
+                let y = parseInt(document.getElementById("valorY").value) || 0;
+                // Mueve la ventana a las coordenadas indicadas relativas a la pantalla
+                window.moveTo(x, y); 
+            });
+
+            document.getElementById("btnRedimensionar").addEventListener("click", function() {
+                let ancho = parseInt(document.getElementById("valorX").value) || 500;
+                let alto = parseInt(document.getElementById("valorY").value) || 500;
+                // Redimensiona la ventana al ancho y alto indicados
+                window.resizeTo(ancho, alto);
+            });
+        };
+    </script>
+</body>
+</html>

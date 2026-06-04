@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cartel Perseguidor</title>
+    <style>
+        /* Estilos básicos para los párrafos */
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        p { line-height: 1.6; margin-bottom: 20px; }
+        
+        /* Estilos del cartel que pide el enunciado */
+        #cartel {
+            background-color: yellow;
+            padding: 5px 10px;
+            border: 1px solid black;
+            font-weight: bold;
+            /* Fundamental: posicionamiento absoluto para poder moverlo */
+            position: absolute; 
+            /* Evita que el cartel bloquee el clic o el cursor sobre otros elementos */
+            pointer-events: none; 
+        }
+    </style>
+</head>
+<body>
+    <div id="cartel">Hola</div>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.</p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartel = document.getElementById('cartel');
+
+            // Escuchamos el movimiento del ratón en todo el documento
+            document.addEventListener('mousemove', function(evento) {
+                // evento.pageX e evento.pageY nos dan las coordenadas exactas del ratón
+                // Sumamos 15px para que el cartel aparezca un poco a la derecha y abajo del cursor (y no justo debajo de la flecha)
+                cartel.style.left = (evento.pageX + 15) + 'px';
+                cartel.style.top = (evento.pageY + 15) + 'px';
+            });
+        });
+    </script>
+</body>
+</html>

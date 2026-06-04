@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Diferencia de Fechas</title>
+</head>
+<body>
+    <h2>Cálculo de días entre fechas</h2>
+    <button id="btnFechas">Introducir Fechas</button>
+    <p id="resultadoFechas"></p>
+
+    <script>
+        // Función auxiliar para pedir una fecha repetidamente hasta que el formato sea correcto
+        function pedirFechaValida(mensaje) {
+            let fechaStr;
+            // Expresión regular: \d{2} son dos dígitos. \/ escapa la barra. \d{4} son cuatro dígitos.
+            // ^ indica el principio del texto y $ el final.
+            let regex = /^\d{2}\/\d{2}\/\d{4}$/; 
+            
+            do {
+                fechaStr = prompt(mensaje);
+                
+                // Si el usuario da a cancelar, salimos para no dejarlo atrapado
+                if (fechaStr === null) return null; 
+                
+                if (!regex.test(fechaStr)) {
+                    alert("Formato incorrecto. Por favor, usa dd/mm/aaaa.");
+                }
+            } while (!regex.test(fechaStr));
+            
+            return fechaStr;
+        }
+
+        window.onload = function() {
+            document.getElementById('btnFechas').addEventListener('click', function() {
+                
+                // 1. Pedimos las dos fechas
+                let stringFecha1 = pedirFechaValida("Introduce la primera fecha (dd/mm/aaaa):");
+                if (!stringFecha1) return; // Si canceló, paramos.
+                
+                let stringFecha2 = pedirFechaValida("Introduce la segunda fecha (dd/mm/aaaa):");
+                if (!stringFecha2) return;
+
+                // 2. Convertimos los textos (strings) a objetos Date de JavaScript.
+                // Como tenemos el formato dd/mm/aaaa, usamos split('/') para partirlo en un array [dd, mm, aaaa]
+                let partes1 = stringFecha1.split('/');
+                let partes2 = stringFecha2.split('/');
+
+                // OJO: En JavaScript, los meses en el objeto Date empiezan en 0 (Enero = 0, Diciembre = 11).
+                // Por eso le restamos 1 al mes (partes[1] - 1). El formato de new Date() es (año, mes, día).
+                let fecha1 = new Date(partes1[2], partes1[1] - 1, partes1[0]);
+                let fecha2 = new Date(partes2[2], partes2[1] - 1, partes2[0]);
+
+                // 3. Calculamos la diferencia en milisegundos
+                let diferenciaMilisegundos = Math.abs(fecha2 - fecha1); // Math.abs asegura que siempre dé positivo
+
+                // 4. Pasamos los milisegundos a días
+                // 1000 milisegundos * 60 segundos * 60 minutos * 24 horas = milisegundos en un día (86400000)
+                let milisegundosPorDia = 1000 * 60 * 60 * 24;
+                let diferenciaDias = diferenciaMilisegundos / milisegundosPorDia;
+
+                // Mostramos el resultado
+                document.getElementById('resultadoFechas').innerHTML = 
+                    `Fecha 1: ${stringFecha1}<br>
+                     Fecha 2: ${stringFecha2}<br>
+                     <strong>Diferencia: ${diferenciaDias} días.</strong>`;
+            });
+        };
+    </script>
+</body>
+</html>
