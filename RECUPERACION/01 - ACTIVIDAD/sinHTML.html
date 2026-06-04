@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Tabla Dinámica</title>
+
+    <script>
+        window.onload = function () {
+            // 1. Creamos la tabla y le ponemos un borde para que se vea igual que en la imagen
+            let tabla = document.createElement('table');
+            tabla.border = '1';
+
+            // 2. Definimos los datos en una matriz (array de arrays) para optimizar el código
+            let opciones = [
+                ["Abierto 24h", "Solo mujeres"],
+                ["Clases Colectivas", "Crossfit"],
+                ["Artes Marciales", "Pilates"]
+            ];
+
+            // 3. Recorremos cada fila
+            opciones.forEach(function (filaDatos) {
+                let fila = document.createElement('tr'); // Creamos la etiqueta <tr>
+
+                // 4. Recorremos cada opción dentro de la fila (las columnas)
+                filaDatos.forEach(function (textoOpcion) {
+                    let celda = document.createElement('td'); // Creamos la etiqueta <td>
+
+                    // 5. Creamos el checkbox y le asignamos las propiedades exigidas
+                    let checkbox = document.createElement('input');
+
+                    // Propiedades obligatorias según el enunciado:
+                    checkbox.type = 'checkbox';
+                    checkbox.defaultChecked = false; // Fíjate que en JS es con 'C' mayúscula (camelCase)
+
+                    // Generamos un 'name' y un 'value' dinámicos quitando los espacios del texto
+                    let valorLimpio = textoOpcion.replace(/\s+/g, '').toLowerCase();
+                    checkbox.name = "chk_" + valorLimpio;
+                    checkbox.value = valorLimpio;
+
+                    // 6. Creamos el texto que acompaña al checkbox
+                    let texto = document.createTextNode(" " + textoOpcion);
+
+                    // 7. Enganchamos el checkbox y el texto dentro de la celda (<td>)
+                    celda.appendChild(checkbox);
+                    celda.appendChild(texto);
+
+                    // 8. Enganchamos la celda terminada dentro de la fila (<tr>)
+                    fila.appendChild(celda);
+                });
+
+                // 9. Enganchamos la fila terminada dentro de la tabla (<table>)
+                tabla.appendChild(fila);
+            });
+
+            // 10. Finalmente, enganchamos la tabla completa al cuerpo del documento (<body>)
+            document.body.appendChild(tabla);
+        };
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
