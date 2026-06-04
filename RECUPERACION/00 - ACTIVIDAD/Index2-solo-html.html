@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DE TURISMO POR MADRID</title>
+
+</head>
+
+<body>
+	<p align="center"> Ficha resumen de las opciones elegidas</p>
+	<p align="center">
+		<img id="imagen" src=""><br><br>
+		Ruta Elegida:<input type="textbox" id="info" value=""></input>
+	</p>
+
+	<script>
+		window.onload = function () {
+			let rutaGuardada = sessionStorage.getItem('ruta');
+			if (rutaGuardada) {
+				document.getElementById('info').value = rutaGuardada;
+				document.getElementById('imagen').src = rutaGuardada + ".PNG";
+			}
+		}
+	</script>
+</body>
+
+</html>

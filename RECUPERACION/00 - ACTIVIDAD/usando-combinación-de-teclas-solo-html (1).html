@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Presiona Ctrl + Shift + S<br><br>
+    <input type="text" accesskey="t"><br><br>
+
+    <script>
+        function agregarParrafo() {
+            let nuevoParrafo = document.createElement("p");
+            nuevoParrafo.textContent = "Pulsadas las teclas Control + Shift + S simultaneamente";
+            document.body.appendChild(nuevoParrafo);
+        }
+
+        document.addEventListener("keydown", function (evento) {
+            if (evento.ctrlKey && evento.shiftKey && (evento.key === "S" || evento.key === "s")) {
+                evento.preventDefault();
+                setTimeout(agregarParrafo, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Turismo por Madrid</title>
+
+</head>
+
+<body>
+	<p align="center"> ELIGE UNA DE LAS SIGUIENTES OPCIONES&nbsp;</p>
+
+	<p align="center">
+		Opción 1 <a href="Index2.html" class="Turismo" name="Austrias"> Visita de la ruta de los Austrias </a><br><br>
+		Opción 2 <a href="Index2.html" class="Turismo" name="Moderno"> Visita del Madrid moderno </a><br><br>
+		Opción 3 <a href="Index2.html" class="Turismo" name="Museos"> Visita de los museos</a><br><br>
+	</p>
+	<script>
+		function configurar(evento) {
+			evento.preventDefault();
+			let rutaElegida = evento.target.name;
+			sessionStorage.setItem('ruta', rutaElegida);
+			window.location.href = 'Index2-solo-html.html';
+		}
+
+		window.onload = function () {
+			let enlaces = document.querySelectorAll('.Turismo');
+
+			enlaces.forEach(function (enlace) {
+				enlace.addEventListener('click', configurar);
+			});
+		}
+	</script>
+</body>
+</html>

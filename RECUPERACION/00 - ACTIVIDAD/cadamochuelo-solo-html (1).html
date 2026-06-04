@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadiendo y Eliminando elementos de manera dinámica</title>
+</head>
+
+<body>
+    <p id="A">Cada mochuelo ...</p>
+    <i id="B">Descansa felizmente</i>
+
+    <hr />
+
+    <input type="button" value="anadirChild" id="btonA" />
+    <input type="button" value="eliminarChild" id="btonE" />
+    <script>
+        window.onload = function () {
+
+            let botonAnadir = document.getElementById('btonA');
+            let botonEliminar = document.getElementById('btonE');
+
+            botonAnadir.addEventListener('click', function () {
+                let parrafoA = document.getElementById('A');
+                let textoNuevo = document.createTextNode(" en su olivo");
+                parrafoA.appendChild(textoNuevo);
+                botonAnadir.disabled = true;
+            });
+            
+            botonEliminar.addEventListener('click', function () {
+                let elementoB = document.getElementById('B');
+                if (elementoB) {
+                    elementoB.parentNode.removeChild(elementoB);
+                }
+            });
+        };
+    </script>
+</body>
+
+</html>

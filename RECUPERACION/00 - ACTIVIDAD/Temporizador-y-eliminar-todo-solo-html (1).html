@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Timer más métodos object element DOM</title>
+
+</head>
+
+<body>
+	<p align="center"> OBJETO DOCUMENT&nbsp;</p>
+
+	<p align="center">
+		Opción 1 <a href="Index2.html" class="Turismo" name="Austrias"> Visita de la ruta de los Austrias </a><br><br>
+		Opción 2 <a href="Index2.html" class="Turismo" name="Moderno"> Visita del Madrid moderno </a><br><br>
+		Opción 3 <a href="Index2.html" class="Turismo" name="Museos"> Visita de los museos</a><br><br>
+	</p>
+
+	<script>
+		document.addEventListener('readystatechange', function () {
+			if (document.readyState === 'complete') {
+				setTimeout(function () {
+					let cuerpoDocumento = document.body;
+					while (cuerpoDocumento.firstChild) {
+						cuerpoDocumento.removeChild(cuerpoDocumento.firstChild);
+					}
+				}, 4000);
+			}
+		});
+	</script>
+</body>
+
+</html>
