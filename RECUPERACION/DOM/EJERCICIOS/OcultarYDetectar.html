@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: 4. ClassList Contains</title>
+    <style>
+        body { font-family: Arial; padding: 50px; text-align: center; }
+        .cuadro {
+            width: 200px;
+            height: 200px;
+            background-color: #6f42c1;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px auto;
+            border-radius: 10px;
+            transition: opacity 0.3s;
+        }
+        
+        /* La clase que vamos a investigar */
+        .oculto {
+            opacity: 0.1; /* En lugar de desaparecer del todo, lo ponemos transparente para que veas el efecto */
+        }
+
+        button { padding: 10px 20px; font-size: 16px; margin: 5px; cursor: pointer; border: none; border-radius: 5px;}
+        #btnAccion { background-color: #ffc107; color: black; font-weight: bold;}
+        #btnInvestigar { background-color: #17a2b8; color: white; font-weight: bold;}
+        #resultado { margin-top: 20px; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>El Detective de Clases</h2>
+    
+    <div id="miCaja" class="cuadro">SOY LA CAJA</div>
+    
+    <button id="btnAccion">Alternar Estado (Poner/Quitar Clase)</button>
+    <br><br>
+    <button id="btnInvestigar">🔍 ¿Tiene la clase 'oculto' puesta?</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            let caja = document.getElementById("miCaja");
+            let btnAccion = document.getElementById("btnAccion");
+            let btnInvestigar = document.getElementById("btnInvestigar");
+            let resultado = document.getElementById("resultado");
+
+            // Botón 1: Simplemente pone y quita la clase (como un interruptor)
+            btnAccion.addEventListener("click", function() {
+                caja.classList.toggle("oculto");
+                resultado.innerHTML = ""; // Limpiamos el texto al cambiar el estado
+            });
+
+            // Botón 2: PREGUNTA usando CONTAINS
+            btnInvestigar.addEventListener("click", function() {
+                
+                // Le preguntamos al elemento si en este momento exacto tiene la clase "oculto"
+                if (caja.classList.contains("oculto")) {
+                    
+                    // SI ES TRUE:
+                    resultado.innerHTML = "✅ SÍ, la caja tiene la clase 'oculto'. (Está medio invisible)";
+                    resultado.style.color = "red";
+                    
+                } else {
+                    
+                    // SI ES FALSE:
+                    resultado.innerHTML = "❌ NO, la caja NO tiene la clase 'oculto'. (Está 100% visible)";
+                    resultado.style.color = "green";
+                    
+                }
+                
+            });
+
+        });
+    </script>
+</body>
+</html>

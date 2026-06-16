@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let cuenta=0;
+        function asignoeventos(){
+            document.getElementsByTagName("input")[1].addEventListener("click",contando,false);
+        }
+        function contando(){
+            cuenta ++
+            document.getElementById("contador").value=cuenta;
+        }
+
+        //document.addEventListener("readystatechange",asignoeventos,false);
+        document.addEventListener("DOMContentLoaded",asignoeventos,false);
+    </script>
+</head>
+<body>
+    <center>
+        <label for="">Número de clicks: </label><input type="text" id="contador"><br><br>
+        <input type="button" value="PULSAR AQUÍ">
+    </center>    
+</body>
+</html>

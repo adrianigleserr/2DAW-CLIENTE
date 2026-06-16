@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Borrar y Cerrar Manual</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; text-align: center; background-color: #f4f4f9;}
+        .panel { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            display: inline-block; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            margin-bottom: 30px;
+        }
+        button { 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            margin: 5px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px; 
+            color: white;
+            font-weight: bold;
+        }
+        #btnBorrarCaja { background: #f39c12; }
+        #btnBorrarCaja:hover { background: #e67e22; }
+        
+        #btnBorrarTodo { background: #e74c3c; }
+        #btnBorrarTodo:hover { background: #c0392b; }
+        
+        #btnCerrar { background: #34495e; }
+        #btnCerrar:hover { background: #2c3e50; }
+    </style>
+</head>
+<body>
+    
+    <h1>Panel de Control de la Ventana</h1>
+    
+    <div id="cajaBorrable" class="panel">
+        <h3>Soy una caja en el DOM</h3>
+        <p>Si pulsas el botón naranja, desapareceré para siempre usando <code>.remove()</code>.</p>
+        <button id="btnBorrarCaja">1. Borrar esta caja específica</button>
+    </div>
+
+    <br>
+    
+    <button id="btnBorrarTodo">2. Vaciar TODA la página</button>
+    <button id="btnCerrar">3. Cerrar Pestaña Segura</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            let btnBorrarCaja = document.getElementById("btnBorrarCaja");
+            let btnBorrarTodo = document.getElementById("btnBorrarTodo");
+            let btnCerrar = document.getElementById("btnCerrar");
+            let caja = document.getElementById("cajaBorrable");
+
+            // 1. Borrar un elemento específico del DOM (.remove)
+            btnBorrarCaja.addEventListener("click", function() {
+                caja.remove(); // Se destruye a sí misma y a su botón interior
+            });
+
+            // 2. Vaciar todo el body (innerHTML) con Confirmación
+            btnBorrarTodo.addEventListener("click", function() {
+                // confirm() saca una ventana que devuelve true (Aceptar) o false (Cancelar)
+                let seguro = confirm("⚠️ ¿Estás seguro de que quieres borrar toda la página?");
+                
+                if (seguro === true) {
+                    // Borramos todo y dejamos un mensaje residual
+                    document.body.innerHTML = "<h2 style='color:red; margin-top:50px;'>El DOM ha sido purgado.</h2>";
+                }
+            });
+
+            // 3. Cerrar la pestaña
+            btnCerrar.addEventListener("click", function() {
+                let salir = confirm("¿Quieres cerrar esta pestaña ahora mismo?");
+                
+                if (salir === true) {
+                    window.close();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

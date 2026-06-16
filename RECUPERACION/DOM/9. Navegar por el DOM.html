@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let parrafo = document.getElementById("miParrafo");
+
+        // Ir hacia arriba: Seleccionar al padre directo que envuelve al párrafo
+        let suPadre = parrafo.parentNode;
+
+        // Ir hacia abajo: Seleccionar a los hijos
+        // HTML: <ul id="lista"><p>Hijo 1</p><p>Hijo 2</p></ul>
+        let lista = document.getElementById("lista");
+
+        let primerHijo = lista.firstChild;       // Atrapa al primer elemento de la lista
+        let ultimoHijo = lista.lastChild;        // Atrapa al último
+        let todosLosHijos = lista.children;      // Devuelve un array con todos los hijos
+    </script>
+</body>
+
+</html>

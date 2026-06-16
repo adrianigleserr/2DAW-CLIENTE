@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: 1. Teclado Avanzado</title>
+    <style>
+        body { font-family: Arial; padding: 30px; text-align: center; transition: background 0.3s; }
+        .caja { border: 2px solid #333; padding: 20px; width: 400px; margin: 0 auto; background: white; border-radius: 10px; }
+        input { padding: 10px; width: 80%; font-size: 16px; margin-bottom: 20px; }
+        ul { text-align: left; background: #eee; padding: 15px 30px; border-radius: 5px; }
+        #mensaje { font-weight: bold; font-size: 18px; min-height: 25px; color: blue; margin-top: 15px;}
+        
+        .modo-hacker { background-color: #000; color: #0f0; }
+        .modo-hacker .caja { background: #222; border-color: #0f0; }
+        .modo-hacker ul { background: #111; color: #0f0; }
+    </style>
+</head>
+<body>
+
+    <div class="caja">
+        <h2>Panel de Control por Teclado</h2>
+        <p>Pon el cursor en la caja y prueba:</p>
+        
+        <ul>
+            <li><b>Enter:</b> Guarda el texto.</li>
+            <li><b>Escape:</b> Borra el texto de la caja.</li>
+            <li><b>Ctrl + Shift + S:</b> Activa/Desactiva Modo Hacker.</li>
+            <li><b>Otras teclas:</b> Te dice qué has pulsado.</li>
+        </ul>
+
+        <input type="text" id="miInput" placeholder="Haz clic aquí y pulsa teclas...">
+        
+        <div id="mensaje">Esperando a que pulses algo...</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let input = document.getElementById("miInput");
+            let mensaje = document.getElementById("mensaje");
+
+            // Escuchamos el teclado dentro de la caja de texto
+            input.addEventListener("keydown", function(evento) {
+                
+                // 1. COMBINACIÓN COMPLEJA: Ctrl + Shift + S
+                // (Usamos toLowerCase() por si tienen el Bloq Mayus activado)
+                if (evento.ctrlKey && evento.shiftKey && evento.key.toLowerCase() === "s") {
+                    
+                    // Paramos el comportamiento por defecto (para que el navegador no intente Guardar la página)
+                    evento.preventDefault(); 
+                    
+                    document.body.classList.toggle("modo-hacker");
+                    mensaje.innerHTML = "💻 ¡MODO HACKER ALTERNADO!";
+                    mensaje.style.color = "#0f0";
+
+                // 2. TECLA SIMPLE: Enter
+                } else if (evento.key === "Enter") {
+                    
+                    if (input.value.trim() !== "") {
+                        mensaje.innerHTML = "✅ Guardado con éxito: " + input.value;
+                        mensaje.style.color = "green";
+                    } else {
+                        mensaje.innerHTML = "⚠️ No hay nada que guardar.";
+                        mensaje.style.color = "orange";
+                    }
+
+                // 3. TECLA SIMPLE: Escape
+                } else if (evento.key === "Escape") {
+                    
+                    input.value = ""; // Vaciamos la caja
+                    mensaje.innerHTML = "🗑️ Texto borrado.";
+                    mensaje.style.color = "red";
+
+                // 4. EL "SINO" (Cualquier otra tecla que no sea las de arriba)
+                } else {
+                    // Ignoramos si solo pulsan Ctrl o Shift sueltos para no molestar
+                    if (evento.key !== "Control" && evento.key !== "Shift" && evento.key !== "Alt") {
+                        mensaje.innerHTML = "Has pulsado: <b>" + evento.key + "</b> (No hace nada especial)";
+                        mensaje.style.color = "gray";
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

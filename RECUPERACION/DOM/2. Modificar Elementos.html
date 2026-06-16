@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let titulo = document.getElementById("miTitulo");
+
+        // Cambiar el texto que hay dentro
+        titulo.innerHTML = "Texto nuevo para el examen";
+
+        // Cambiar el valor de una caja de formulario (input)
+        let cajaTexto = document.getElementById("nombre");
+        cajaTexto.value = "Pepe";
+
+        // Cambiar el CSS (Recuerda: sin guiones y la segunda palabra en mayúscula)
+        titulo.style.color = "red";
+        titulo.style.backgroundColor = "black";
+        titulo.style.display = "none"; // Para ocultarlo
+    </script>
+</body>
+
+</html>

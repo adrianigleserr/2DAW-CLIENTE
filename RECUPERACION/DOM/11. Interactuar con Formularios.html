@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cajas de texto (Text, Password, Number...)
+        let cajaNombre = document.getElementById("nombre");
+        let loQueEscribio = cajaNombre.value; // Para LEER lo que puso
+        cajaNombre.value = "Texto por defecto"; // Para ESCRIBIR/CAMBIAR la caja
+
+        // 2. Casillas de verificación (Checkbox) o Botones de radio
+        let casillaTerminos = document.getElementById("aceptoTerminos");
+        let estaMarcada = casillaTerminos.checked; // Devuelve 'true' o 'false'
+        casillaTerminos.checked = true; // Forzamos a que se marque por código
+
+        // 3. Desplegables (Select) - (Como los del ejercicio de colores)
+        let miSelect = document.getElementById("opciones");
+        let valorElegido = miSelect.value; // Te da el "value" de la opción elegida
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Validación ReCaptcha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+        .caja-captcha {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 2px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #referencia {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #333;
+            /* Lo hacemos de solo lectura para que no hagan trampas */
+            pointer-events: none; 
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .alerta {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="caja-captcha">
+        <h2>Control de Seguridad</h2>
+        <p class="alerta">Dispone de 15 segundos para introducir el código.</p>
+        
+        <form name="humano" onsubmit="event.preventDefault();">
+            <label>Código de referencia:</label><br>
+            <input type="text" id="referencia" readonly>
+            
+            <br><br>
+            
+            <label>Introduzca el código aquí:</label><br>
+            <input type="text" id="cliente" autocomplete="off">
+            
+            <br>
+            <button id="btnComprobar">Comprobar</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Atrapamos los elementos
+            let inputReferencia = document.getElementById("referencia");
+            let inputCliente = document.getElementById("cliente");
+            let btnComprobar = document.getElementById("btnComprobar");
+
+            // 2. Generamos el código aleatorio de 6 letras
+            let letrasMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let codigoGenerado = "";
+            
+            for (let i = 0; i < 6; i++) {
+                let posicionAzar = Math.floor(Math.random() * letrasMayusculas.length);
+                codigoGenerado += letrasMayusculas[posicionAzar];
+            }
+            
+            // Lo mostramos en la primera caja
+            inputReferencia.value = codigoGenerado;
+
+            // 3. Activamos la bomba de relojería (15 segundos)
+            let temporizador = setTimeout(function() {
+                alert("¡Tiempo agotado! Has tardado más de 15 segundos.");
+                window.close(); // Cierra la pestaña
+            }, 15000);
+
+            // 4. Evento al hacer clic en comprobar
+            btnComprobar.addEventListener("click", function() {
+                let puestoPorUsuario = inputCliente.value.trim().toUpperCase(); // Convertimos a mayúsculas por si acaso
+                
+                if (puestoPorUsuario !== codigoGenerado) {
+                    // Fallo: cerramos la pestaña
+                    alert("Código incorrecto. La ventana se cerrará.");
+                    window.close();
+                } else {
+                    // Acierto: Frenamos el temporizador para que no nos persiga a la siguiente página
+                    clearTimeout(temporizador);
+                    alert("¡Correcto! Redirigiendo al ejercicio de colores...");
+                    // Redirigimos a la página que pide el enunciado
+                    window.location.href = 'CambioDeColorDeFondoYTexto.html';
+                }
+            });
+            
+        });
+    </script>
+</body>
+</html>

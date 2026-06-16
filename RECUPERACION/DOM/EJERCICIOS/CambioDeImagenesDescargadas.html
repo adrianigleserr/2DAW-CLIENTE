@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Galería Dinámica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eee;
+            text-align: center;
+            padding: 50px;
+        }
+        .contenedor {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+        img {
+            /* Ajustado para formato vertical de las presentaciones */
+            height: 400px;
+            width: 300px;
+            object-fit: cover; 
+            border: 2px solid #333;
+            border-radius: 5px;
+            margin: 20px auto;
+            display: block;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        #descripcion {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Presentaciones SD EBRIA</h2>
+        
+        <!-- El desplegable para elegir el jugador -->
+        <select id="selectorJugador">
+            <option value="inicio">Seleccione un jugador...</option>
+            <option value="dieguito">Dieguito</option>
+            <option value="felipe">Felipe</option>
+            <option value="ivan">Ivan</option>
+            <option value="kiko">Kiko</option>
+        </select>
+
+        <!-- La imagen que va a cambiar. Le ponemos una por defecto -->
+        <img id="imagenPrincipal" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png" alt="Imagen del jugador">
+
+        <!-- El texto que cambiará -->
+        <p id="descripcion">Esperando selección...</p>
+
+        <!-- Botón de reinicio -->
+        <button id="btnReiniciar">Volver al inicio</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Atrapamos los elementos
+            let selector = document.getElementById("selectorJugador");
+            let imagen = document.getElementById("imagenPrincipal");
+            let textoDesc = document.getElementById("descripcion");
+            let boton = document.getElementById("btnReiniciar");
+
+            // 2. Diccionario de URLs de imágenes
+            // Como el HTML estará en la misma carpeta que las fotos, solo ponemos el nombre del archivo
+            const imagenes = {
+                "inicio": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png",
+                "dieguito": "Dieguito.jpg",
+                "felipe": "Felipe.png",
+                "ivan": "Ivan.png",
+                "kiko": "Kiko.png"
+            };
+
+            // 3. Diccionario de textos personalizados (basado en lo que pone en sus cartas)
+            const textos = {
+                "inicio": "Esperando selección...",
+                "dieguito": "Dieguito - Derred Label",
+                "felipe": "Felipe - Patxaran 30",
+                "ivan": "Ivan - Mediocentro",
+                "kiko": "Kiko - Tostada 00"
+            };
+
+            // 4. Evento al cambiar el desplegable
+            selector.addEventListener("change", function() {
+                let seleccion = selector.value;
+                
+                imagen.src = imagenes[seleccion];
+                textoDesc.innerHTML = textos[seleccion];
+            });
+
+            // 5. Evento para reiniciar
+            boton.addEventListener("click", function() {
+                selector.value = "inicio";
+                imagen.src = imagenes["inicio"];
+                textoDesc.innerHTML = textos["inicio"];
+            });
+
+        });
+    </script>
+</body>
+</html>

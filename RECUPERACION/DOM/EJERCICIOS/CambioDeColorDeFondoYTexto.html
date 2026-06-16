@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Personalizador de Estilos</title>
+    <style>
+        /* CSS Básico para que no se vea feo, pero no te preocupes si no te lo sabes todo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            /* Estos son los colores que vamos a cambiar con JS */
+            background-color: white; 
+            color: black;
+            transition: all 0.3s; /* Para que el cambio de color sea suave */
+        }
+
+        #panel-control {
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            width: 350px;
+            background-color: #f9f9f9;
+            /* Para que el panel siempre se lea, forzamos su color a negro */
+            color: black; 
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cc0000;
+        }
+
+        #zona-pruebas {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px dashed black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simulacro de Examen</h1>
+    
+    <div id="panel-control">
+        <h3>Panel de Control</h3>
+        
+        <!-- Opción 1: Desplegable para el fondo -->
+        <label for="colorFondo">1. Elige el color del FONDO:</label>
+        <select id="colorFondo">
+            <option value="white">Blanco (Por defecto)</option>
+            <option value="lightblue">Azul Claro</option>
+            <option value="lightgreen">Verde Claro</option>
+            <option value="lightpink">Rosa Claro</option>
+            <option value="yellow">Amarillo</option>
+        </select>
+
+        <!-- Opción 2: Caja de texto para el texto -->
+        <label for="colorTexto">2. Escribe el color del TEXTO (en inglés):</label>
+        <input type="text" id="colorTexto" placeholder="Ej: red, blue, green...">
+
+        <!-- Botón de reset -->
+        <button id="btnRestablecer">Restablecer Valores</button>
+    </div>
+
+    <div id="zona-pruebas">
+        <h2>Mira cómo cambio</h2>
+        <p>Este es el texto principal de la página. Si usas el panel de control de arriba, verás cómo mi color y el color del fondo de toda la pantalla cambian al instante.</p>
+        <p>¡Prueba a escribir "red" o "orange" en la caja de texto!</p>
+    </div>
+
+
+    <script>
+        // Aseguramos que la página cargue primero
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. ATRAPAMOS LOS ELEMENTOS (El DOM)
+            let selectFondo = document.getElementById("colorFondo");
+            let inputTexto = document.getElementById("colorTexto");
+            let botonReset = document.getElementById("btnRestablecer");
+
+            // 2. EVENTO PARA EL FONDO (Desplegable)
+            // Escuchamos el evento "change" (cuando el usuario elige otra opción)
+            selectFondo.addEventListener("change", function() {
+                // Le ponemos al body el valor (.value) que tenga el select
+                document.body.style.backgroundColor = selectFondo.value;
+            });
+
+            // 3. EVENTO PARA EL TEXTO (Caja de texto)
+            // Escuchamos el evento "input" (se dispara cada vez que el usuario teclea una letra)
+            // También valdría "keyup" o "change" (este último espera a que salgas de la caja)
+            inputTexto.addEventListener("input", function() {
+                // Leemos lo que ha escrito, le quitamos espacios por seguridad con trim()
+                let colorEscrito = inputTexto.value.trim();
+                
+                // Cambiamos el color de la letra del body
+                document.body.style.color = colorEscrito;
+            });
+
+            // 4. EVENTO PARA EL BOTÓN (Restablecer)
+            botonReset.addEventListener("click", function() {
+                // A) Restauramos los estilos de la página
+                document.body.style.backgroundColor = "white";
+                document.body.style.color = "black";
+
+                // B) Vaciamos/Restauramos los valores del formulario para que cuadre
+                selectFondo.value = "white"; // Vuelve a la primera opción
+                inputTexto.value = "";       // Limpia la caja de texto
+            });
+
+        });
+    </script>
+</body>
+</html>

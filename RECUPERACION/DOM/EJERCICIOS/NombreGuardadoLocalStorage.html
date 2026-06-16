@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: LocalStorage (3 Botones)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .tarjeta {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .botones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #btnGuardar { background-color: #007bff; }
+        #btnGuardar:hover { background-color: #0056b3; }
+        
+        #btnMostrar { background-color: #28a745; }
+        #btnMostrar:hover { background-color: #218838; }
+
+        #btnBorrar { background-color: #dc3545; }
+        #btnBorrar:hover { background-color: #c82333; }
+
+        #zonaMensaje {
+            margin-top: 20px;
+            min-height: 50px; /* Para que no salte el diseño al aparecer texto */
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tarjeta">
+        <h2>Control de Usuarios</h2>
+        <p>Escribe tu nombre:</p>
+        
+        <input type="text" id="cajaNombre" placeholder="Tu nombre...">
+        
+        <div class="botones">
+            <button id="btnGuardar">1. Guardar</button>
+            <button id="btnMostrar">2. Mostrar Saludo</button>
+            <button id="btnBorrar">3. Borrar Memoria</button>
+        </div>
+
+        <div id="zonaMensaje">
+            <h3 id="textoMensaje"></h3>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // Atrapamos todos los elementos del HTML
+            let cajaNombre = document.getElementById("cajaNombre");
+            let btnGuardar = document.getElementById("btnGuardar");
+            let btnMostrar = document.getElementById("btnMostrar");
+            let btnBorrar = document.getElementById("btnBorrar");
+            let textoMensaje = document.getElementById("textoMensaje");
+
+            // --- BOTÓN 1: GUARDAR ---
+            btnGuardar.addEventListener("click", function() {
+                let nombreEscrito = cajaNombre.value.trim();
+
+                if (nombreEscrito !== "") {
+                    // Guardamos el nombre
+                    localStorage.setItem("nombreUsuario", nombreEscrito);
+                    
+                    // Marcamos que es un usuario "nuevo" que acaba de registrarse
+                    localStorage.setItem("estado", "nuevo");
+                    
+                    textoMensaje.innerHTML = "✅ Nombre guardado correctamente. Dale a 'Mostrar Saludo'.";
+                    textoMensaje.style.color = "blue";
+                } else {
+                    textoMensaje.innerHTML = "⚠️ Por favor, escribe un nombre primero.";
+                    textoMensaje.style.color = "orange";
+                }
+            });
+
+            // --- BOTÓN 2: MOSTRAR ---
+            btnMostrar.addEventListener("click", function() {
+                // Leemos lo que hay guardado en la memoria
+                let nombreGuardado = localStorage.getItem("nombreUsuario");
+                let estadoGuardado = localStorage.getItem("estado");
+
+                if (nombreGuardado === null) {
+                    // Si no hay nada en la memoria...
+                    textoMensaje.innerHTML = "❌ No hay nadie guardado. Usa el botón Guardar primero.";
+                    textoMensaje.style.color = "red";
+                
+                } else if (estadoGuardado === "nuevo") {
+                    // Si es su primera vez saludando...
+                    textoMensaje.innerHTML = "¡Bienvenido, " + nombreGuardado + "!";
+                    textoMensaje.style.color = "green";
+                    
+                    // TRUCO: Le cambiamos el estado a veterano para la próxima vez
+                    localStorage.setItem("estado", "veterano");
+                
+                } else {
+                    // Si ya le habíamos saludado antes (estado = veterano)...
+                    textoMensaje.innerHTML = "Me alegro de volver a verte de nuevo, " + nombreGuardado + "!";
+                    textoMensaje.style.color = "green";
+                }
+            });
+
+            // --- BOTÓN 3: BORRAR ---
+            btnBorrar.addEventListener("click", function() {
+                // Eliminamos las variables del localStorage
+                localStorage.removeItem("nombreUsuario");
+                localStorage.removeItem("estado");
+                
+                // Vaciamos la caja de texto y el mensaje
+                cajaNombre.value = "";
+                textoMensaje.innerHTML = "🗑️ Memoria borrada con éxito.";
+                textoMensaje.style.color = "gray";
+            });
+
+        });
+    </script>
+</body>
+</html>

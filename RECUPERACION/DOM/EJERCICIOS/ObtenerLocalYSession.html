@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Obtener Local y Session</title>
+    <style>
+        body { font-family: Arial; padding: 30px; background-color: #f4f4f9; display: flex; flex-direction: column; align-items: center;}
+        .panel { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 400px; margin-bottom: 20px;}
+        input { width: 90%; padding: 10px; margin: 10px 0; font-size: 14px;}
+        button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; margin-bottom: 10px;}
+        button:hover { background: #0056b3; }
+        .resultados { display: flex; gap: 20px; width: 100%; justify-content: center;}
+        .caja-res { background: #eee; padding: 15px; border-radius: 8px; width: 200px; border: 2px solid #ccc; text-align: center;}
+        .titulo-res { font-weight: bold; margin-bottom: 10px; font-size: 18px;}
+        #btnBorrar { background: #dc3545; }
+    </style>
+</head>
+<body>
+
+    <div class="panel">
+        <h2>Panel de Guardado</h2>
+        <input type="text" id="datoPermanente" placeholder="Escribe un dato Permanente...">
+        <input type="text" id="datoTemporal" placeholder="Escribe un dato Temporal...">
+        
+        <button id="btnGuardar">Guardar en Ambas Memorias</button>
+        <button id="btnLeer">Obtener Datos (Leer Memorias)</button>
+        <button id="btnBorrar">Borrar Todo</button>
+    </div>
+
+    <div class="resultados">
+        <div class="caja-res">
+            <div class="titulo-res">LocalStorage<br><small>(Permanente)</small></div>
+            <div id="resLocal">Vacío</div>
+        </div>
+        
+        <div class="caja-res">
+            <div class="titulo-res">SessionStorage<br><small>(Temporal)</small></div>
+            <div id="resSession">Vacío</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            let btnGuardar = document.getElementById("btnGuardar");
+            let btnLeer = document.getElementById("btnLeer");
+            let btnBorrar = document.getElementById("btnBorrar");
+
+            let resLocal = document.getElementById("resLocal");
+            let resSession = document.getElementById("resSession");
+
+            // 1. GUARDAR EN AMBAS
+            btnGuardar.addEventListener("click", function() {
+                let permanente = document.getElementById("datoPermanente").value;
+                let temporal = document.getElementById("datoTemporal").value;
+
+                // Usamos localStorage para uno y sessionStorage para el otro
+                localStorage.setItem("miDatoFijo", permanente);
+                sessionStorage.setItem("miDatoSesion", temporal);
+
+                alert("Datos guardados. Ahora dale a 'Obtener Datos'.");
+            });
+
+            // 2. OBTENER LAS LOCAL Y SESSION
+            btnLeer.addEventListener("click", function() {
+                
+                // Leemos ambas memorias
+                let guardadoLocal = localStorage.getItem("miDatoFijo");
+                let guardadoSession = sessionStorage.getItem("miDatoSesion");
+
+                // Mostramos Local
+                if (guardadoLocal !== null && guardadoLocal !== "") {
+                    resLocal.innerHTML = guardadoLocal;
+                    resLocal.style.color = "blue";
+                } else {
+                    resLocal.innerHTML = "No hay datos";
+                    resLocal.style.color = "red";
+                }
+
+                // Mostramos Session
+                if (guardadoSession !== null && guardadoSession !== "") {
+                    resSession.innerHTML = guardadoSession;
+                    resSession.style.color = "green";
+                } else {
+                    resSession.innerHTML = "No hay datos";
+                    resSession.style.color = "red";
+                }
+            });
+
+            // 3. BORRAR TODO
+            btnBorrar.addEventListener("click", function() {
+                // Se pueden borrar claves específicas o usar .clear() para borrar TODO
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                resLocal.innerHTML = "Vacío";
+                resSession.innerHTML = "Vacío";
+                resLocal.style.color = "black";
+                resSession.style.color = "black";
+            });
+
+        });
+    </script>
+</body>
+</html>

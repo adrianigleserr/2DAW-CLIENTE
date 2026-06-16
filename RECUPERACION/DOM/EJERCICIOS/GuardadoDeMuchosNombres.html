@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Agenda LocalStorage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .tarjeta {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .botones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #btnGuardar { background-color: #007bff; }
+        #btnMostrar { background-color: #28a745; }
+        #btnBorrar { background-color: #dc3545; }
+
+        button:hover { filter: brightness(0.9); } /* Truco rápido para el hover de todos los botones */
+
+        #zonaMensaje {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #zonaLista {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            min-height: 50px;
+            text-align: left;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tarjeta">
+        <h2>Registro de Usuarios</h2>
+        
+        <!-- Formulario -->
+        <input type="text" id="cajaNombre" placeholder="Nombre...">
+        <input type="text" id="cajaApellidos" placeholder="Apellidos...">
+        <input type="number" id="cajaEdad" placeholder="Edad...">
+        
+        <!-- Botones -->
+        <div class="botones">
+            <button id="btnGuardar">1. Guardar Usuario</button>
+            <button id="btnMostrar">2. Mostrar Guardados</button>
+            <button id="btnBorrar">3. Borrar Toda la Lista</button>
+        </div>
+
+        <!-- Mensajes de aviso -->
+        <div id="zonaMensaje"></div>
+
+        <!-- Donde saldrá la lista de usuarios -->
+        <div id="zonaLista">
+            <em>La lista aparecerá aquí...</em>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Atrapamos los elementos
+            let cajaNombre = document.getElementById("cajaNombre");
+            let cajaApellidos = document.getElementById("cajaApellidos");
+            let cajaEdad = document.getElementById("cajaEdad");
+            
+            let btnGuardar = document.getElementById("btnGuardar");
+            let btnMostrar = document.getElementById("btnMostrar");
+            let btnBorrar = document.getElementById("btnBorrar");
+            
+            let zonaMensaje = document.getElementById("zonaMensaje");
+            let zonaLista = document.getElementById("zonaLista");
+
+            // =====================================
+            // BOTÓN 1: GUARDAR (Acumular datos)
+            // =====================================
+            btnGuardar.addEventListener("click", function() {
+                let nombre = cajaNombre.value.trim();
+                let apellidos = cajaApellidos.value.trim();
+                let edad = cajaEdad.value.trim();
+
+                // Validamos que haya escrito algo en los tres campos
+                if (nombre === "" || apellidos === "" || edad === "") {
+                    zonaMensaje.innerHTML = "⚠️ Rellena todos los campos";
+                    zonaMensaje.style.color = "orange";
+                    return; // Cortamos la función aquí si falta algo
+                }
+
+                // TRUCO PARA ACUMULAR: 
+                // 1. Leemos lo que ya hay guardado. Si no hay nada, empezamos con un texto vacío ("")
+                let listaAntigua = localStorage.getItem("misUsuarios");
+                if (listaAntigua === null) {
+                    listaAntigua = "";
+                }
+
+                // 2. Preparamos el nuevo texto (Un <li> de HTML)
+                let nuevoUsuario = "<li>" + nombre + " " + apellidos + " (" + edad + " años)</li>";
+
+                // 3. Juntamos lo viejo con lo nuevo y lo guardamos
+                let listaActualizada = listaAntigua + nuevoUsuario;
+                localStorage.setItem("misUsuarios", listaActualizada);
+
+                // Avisamos y vaciamos las cajas para el siguiente
+                zonaMensaje.innerHTML = "✅ Usuario guardado correctamente";
+                zonaMensaje.style.color = "green";
+                
+                cajaNombre.value = "";
+                cajaApellidos.value = "";
+                cajaEdad.value = "";
+            });
+
+            // =====================================
+            // BOTÓN 2: MOSTRAR
+            // =====================================
+            btnMostrar.addEventListener("click", function() {
+                // Recuperamos toda la lista gigante de la memoria
+                let datosGuardados = localStorage.getItem("misUsuarios");
+
+                if (datosGuardados === null || datosGuardados === "") {
+                    // Si no hay nada
+                    zonaLista.innerHTML = "<em>No hay ningún usuario guardado.</em>";
+                    zonaMensaje.innerHTML = "❌ Lista vacía";
+                    zonaMensaje.style.color = "red";
+                } else {
+                    // Si hay datos, los inyectamos dentro de un <ul> en el HTML
+                    zonaLista.innerHTML = "<ul>" + datosGuardados + "</ul>";
+                    zonaMensaje.innerHTML = "📋 Lista cargada";
+                    zonaMensaje.style.color = "blue";
+                }
+            });
+
+            // =====================================
+            // BOTÓN 3: BORRAR
+            // =====================================
+            btnBorrar.addEventListener("click", function() {
+                // Eliminamos la clave de la memoria
+                localStorage.removeItem("misUsuarios");
+                
+                // Limpiamos la pantalla
+                zonaLista.innerHTML = "<em>La lista aparecerá aquí...</em>";
+                zonaMensaje.innerHTML = "🗑️ Memoria borrada";
+                zonaMensaje.style.color = "gray";
+            });
+
+        });
+    </script>
+</body>
+</html>

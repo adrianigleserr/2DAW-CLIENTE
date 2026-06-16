@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Atrapar por ID (El más usado y seguro)
+        // HTML: <p id="mensaje">Hola</p>
+        let parrafo = document.getElementById("mensaje");
+
+        // Atrapar por Etiqueta (Devuelve una lista/array)
+        // HTML: <input type="text"> <input type="text">
+        let inputs = document.getElementsByTagName("input");
+        let primerInput = inputs[0];
+
+        // Atrapar usando selectores de CSS (El moderno)
+        // HTML: <div class="caja"></div>
+        let caja = document.querySelector(".caja"); // Solo atrapa el primero que encuentre
+    </script>
+</body>
+
+</html>

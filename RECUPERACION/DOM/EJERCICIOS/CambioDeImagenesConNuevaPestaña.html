@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Galería Dinámica (Nueva Pestaña)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eee;
+            text-align: center;
+            padding: 50px;
+        }
+        .contenedor {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: inline-block;
+            width: 300px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        /* Estilos para que los nombres parezcan botones grandes de un menú */
+        button.btn-jugador {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button.btn-jugador:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Plantilla SD EBRIA</h2>
+        <p>Haz clic en un jugador:</p>
+        
+        <!-- Lista de nombres con un atributo personalizado 'data-id' para identificarlos -->
+        <button class="btn-jugador" data-id="dieguito">Dieguito</button>
+        <button class="btn-jugador" data-id="felipe">Felipe</button>
+        <button class="btn-jugador" data-id="ivan">Ivan</button>
+        <button class="btn-jugador" data-id="kiko">Kiko</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Diccionario de URLs de imágenes
+            const imagenes = {
+                "dieguito": "Dieguito.jpg",
+                "felipe": "Felipe.png",
+                "ivan": "Ivan.png",
+                "kiko": "Kiko.png"
+            };
+
+            // 2. Diccionario de textos
+            const textos = {
+                "dieguito": "Dieguito - Derred Label",
+                "felipe": "Felipe - Patxaran 30",
+                "ivan": "Ivan - Mediocentro",
+                "kiko": "Kiko - Tostada 00"
+            };
+
+            // 3. Atrapamos todos los botones que tienen la clase 'btn-jugador'
+            let botones = document.querySelectorAll('.btn-jugador');
+
+            // 4. Le ponemos un evento de clic a cada botón usando un bucle
+            for (let i = 0; i < botones.length; i++) {
+                botones[i].addEventListener("click", function() {
+                    
+                    // Averiguamos qué botón hemos pulsado usando su atributo 'data-id'
+                    let idJugador = this.getAttribute("data-id");
+                    
+                    // Recuperamos su foto y su texto
+                    let foto = imagenes[idJugador];
+                    let descripcion = textos[idJugador];
+
+                    // 5. BOM: Abrimos una nueva pestaña en blanco
+                    let nuevaPestana = window.open("", "_blank");
+
+                    // 6. DOM de la nueva pestaña: Escribimos el HTML dentro de ella (Usamos comillas y sumas para que sea 100% seguro)
+                    let contenidoHTML = "<html><head><title>Presentación: " + descripcion + "</title>";
+                    contenidoHTML += "<style>";
+                    contenidoHTML += "body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; padding: 40px; }";
+                    contenidoHTML += "img { height: 500px; border: 4px solid #fff; border-radius: 10px; box-shadow: 0 0 20px rgba(255,255,255,0.2); }";
+                    contenidoHTML += "h1 { margin-top: 30px; color: #4CAF50; }";
+                    contenidoHTML += "</style></head><body>";
+                    contenidoHTML += "<img src='" + foto + "' alt='" + descripcion + "'>";
+                    contenidoHTML += "<h1>" + descripcion + "</h1>";
+                    contenidoHTML += "</body></html>";
+                    
+                    nuevaPestana.document.write(contenidoHTML);
+                    
+                    // Cerramos el flujo de escritura para que el navegador sepa que hemos terminado y renderice la página
+                    nuevaPestana.document.close();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

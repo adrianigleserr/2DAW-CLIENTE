@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Teclado y Foco</title>
+    <script>
+        let cjausuario, cjaclave
+        document.addEventListener("DOMContentLoaded",inicio,false);
+        function inicio(){
+            cjausuario=document.getElementsByTagName("input")[0];
+            cjausuario.addEventListener('keydown',gestionevento,false);
+            cjausuario.focus();
+            cjaclave=document.getElementsByTagName("input")[1];
+            cjaclave.addEventListener('keydown',gestionevento,false);
+        }
+        function gestionevento(evento){
+            console.log(evento.key);
+            switch (evento.key){
+                case "Enter":
+                        switch (evento.target){
+                            case (cjausuario):
+                                cjaclave.focus();
+                                cjausuario.disabled=true;
+                                break;
+                            case (cjaclave):
+                                
+                                enviandomensaje();
+                                cjaclave.disabled=true;
+                                break;
+                        }
+                break;
+
+            }
+        }
+        function enviandomensaje(){
+            document.getElementById("mensaje").textContent="Enviando mensaje a servidor";
+        }
+        
+    </script>
+</head>
+<body>
+    <label for="">Usuario: </label><input type="text"><br><br>
+    <label for="">Clave: </label><input type="text"><br><br>
+    <h2>MENSAJE AL SERVIDOR</h2>
+    <div id="mensaje"></div>
+</body>
+</html>

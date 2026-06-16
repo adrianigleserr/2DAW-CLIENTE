@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Galería Dinámica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eee;
+            text-align: center;
+            padding: 50px;
+        }
+        .contenedor {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+        img {
+            width: 400px;
+            height: 250px;
+            object-fit: cover;
+            border: 2px solid #333;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: block; /* Para que el margin: auto funcione */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        #descripcion {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Selecciona un Vehículo</h2>
+        
+        <!-- El desplegable para elegir -->
+        <select id="selectorVehiculo">
+            <option value="inicio">Seleccione una opción...</option>
+            <option value="coche">Coche Deportivo</option>
+            <option value="moto">Motocicleta</option>
+            <option value="bici">Bicicleta de Montaña</option>
+        </select>
+
+        <!-- La imagen que va a cambiar. Le ponemos una por defecto -->
+        <!-- NOTA: Uso imágenes de Wikipedia/Wikimedia como "placeholders" seguros -->
+        <img id="imagenPrincipal" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png" alt="Imagen no disponible">
+
+        <!-- El texto que cambiará -->
+        <p id="descripcion">Esperando selección...</p>
+
+        <!-- Botón de reinicio -->
+        <button id="btnReiniciar">Volver al inicio</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Atrapamos los elementos
+            let selector = document.getElementById("selectorVehiculo");
+            let imagen = document.getElementById("imagenPrincipal");
+            let textoDesc = document.getElementById("descripcion");
+            let boton = document.getElementById("btnReiniciar");
+
+            // 2. Diccionario de URLs de imágenes (para tenerlo ordenado)
+            // En el examen el profesor te dará las rutas (ej: "foto1.jpg", "foto2.jpg")
+            const imagenes = {
+                "inicio": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png",
+                "coche": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Ferrari_488_GTB_in_Monaco.jpg/400px-Ferrari_488_GTB_in_Monaco.jpg",
+                "moto": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Honda_CBR500R_2013.jpg/400px-Honda_CBR500R_2013.jpg",
+                "bici": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Bicicleta_de_monta%C3%B1a.jpg/400px-Bicicleta_de_monta%C3%B1a.jpg"
+            };
+
+            // 3. Diccionario de textos
+            const textos = {
+                "inicio": "Esperando selección...",
+                "coche": "Un deportivo rojo muy rápido.",
+                "moto": "Una moto perfecta para la ciudad y carretera.",
+                "bici": "Ideal para hacer deporte en la naturaleza."
+            };
+
+            // 4. Evento al cambiar el desplegable
+            selector.addEventListener("change", function() {
+                // Obtenemos el "value" de la opción elegida (ej: "coche")
+                let seleccion = selector.value;
+                
+                // Cambiamos el atributo 'src' de la imagen
+                imagen.src = imagenes[seleccion];
+                
+                // Cambiamos el texto del párrafo
+                textoDesc.innerHTML = textos[seleccion];
+            });
+
+            // 5. Evento para reiniciar
+            boton.addEventListener("click", function() {
+                // Volvemos el desplegable a la opción inicial
+                selector.value = "inicio";
+                
+                // Forzamos el cambio de imagen y texto manualmente
+                imagen.src = imagenes["inicio"];
+                textoDesc.innerHTML = textos["inicio"];
+            });
+
+        });
+    </script>
+</body>
+</html>

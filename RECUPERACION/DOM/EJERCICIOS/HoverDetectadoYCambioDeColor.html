@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Eventos de Ratón</title>
+    <style>
+        body { font-family: Arial; padding: 50px; text-align: center; }
+        #zonaInteractiva {
+            width: 300px;
+            height: 200px;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 auto;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Pasa el ratón por la caja</h2>
+    <div id="zonaInteractiva">¡Estoy normal!</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            let caja = document.getElementById("zonaInteractiva");
+
+            // 1. Cuando el puntero del ratón ENTRA en la caja
+            caja.addEventListener("mouseover", function() {
+                caja.style.backgroundColor = "#dc3545"; // Cambia a rojo
+                caja.innerHTML = "¡Me estás tocando! 🐀";
+            });
+
+            // 2. Cuando el puntero del ratón SALE de la caja
+            caja.addEventListener("mouseout", function() {
+                caja.style.backgroundColor = "#007bff"; // Vuelve a azul
+                caja.innerHTML = "¡Has sacado el ratón!";
+            });
+
+        });
+    </script>
+</body>
+</html>

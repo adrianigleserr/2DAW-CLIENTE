@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let miImagen = document.getElementById("fotoPerfil");
+        let miBoton = document.getElementById("btnEnviar");
+
+        // Forma directa (La más rápida y recomendada)
+        miImagen.src = "nueva-foto.jpg"; // Cambia la imagen
+        miBoton.disabled = true; // Desactiva el botón para que no se pueda hacer clic
+
+        // Forma con setAttribute (Muy útil si el atributo es inventado o especial)
+        miImagen.setAttribute("src", "nueva-foto.jpg");
+        miImagen.setAttribute("alt", "Texto alternativo de la imagen");
+    </script>
+</body>
+
+</html>

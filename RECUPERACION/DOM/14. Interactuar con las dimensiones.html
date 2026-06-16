@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let miCaja = document.getElementById("cajaRoja");
+
+        // Te dan el tamaño total del elemento (incluyendo bordes y relleno)
+        let ancho = miCaja.offsetWidth;
+        let alto = miCaja.offsetHeight;
+
+        // Te dan la posición actual del elemento respecto al navegador
+        let distanciaDesdeArriba = miCaja.offsetTop;
+        let distanciaDesdeIzquierda = miCaja.offsetLeft;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Atrapamos el elemento
+        let parrafo = document.getElementById("mensaje");
+
+        // Si usamos innerHTML, la palabra "aprobado" saldrá en negrita en la pantalla
+        parrafo.innerHTML = "He <strong>aprobado</strong> el examen";
+
+        // Si usamos textContent, se verá literalmente la etiqueta <strong> escrita en la pantalla
+        parrafo.textContent = "Solo quiero texto normal";
+    </script>
+</body>
+
+</html>

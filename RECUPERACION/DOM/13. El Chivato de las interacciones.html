@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Si ponemos el evento a TODA la página...
+        document.addEventListener("click", function (evento) {
+
+            // evento.target es el elemento exacto que recibió el clic
+            let loQueToque = evento.target;
+
+            // Podemos preguntar qué tipo de etiqueta es (ej: "BUTTON", "P", "DIV")
+            if (loQueToque.tagName === "BUTTON") {
+                alert("¡Has pulsado un botón!");
+            } else {
+                // Podemos cambiarle el color a lo que sea que hayamos tocado
+                loQueToque.style.backgroundColor = "yellow";
+            }
+        });
+    </script>
+</body>
+
+</html>

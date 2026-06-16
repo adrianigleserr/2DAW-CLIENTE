@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let caja = document.getElementById("miCaja");
+
+        // Color de texto
+        caja.style.color = "red";
+
+        // Color de fondo (nota el camelCase)
+        caja.style.backgroundColor = "black";
+
+        // Tamaño de fuente
+        caja.style.fontSize = "24px"; // ¡No olvides poner 'px'!
+
+        // Ocultar y mostrar
+        caja.style.display = "none";  // Lo oculta
+        caja.style.display = "block"; // Lo vuelve a mostrar
+
+
+        
+        // Opción B: Usando clases (.classList)
+        //Si el profesor ya te da un bloque <style> con clases hechas (por ejemplo .resaltado { background: yellow; }), la forma más profesional de aplicarlo no es cambiar el color a mano, sino ponerle esa clase al elemento.
+        JavaScript
+        let caja = document.getElementById("miCaja");
+
+        // Le añadimos la clase CSS
+        caja.classList.add("resaltado");
+
+        // Se la quitamos
+        caja.classList.remove("resaltado");
+    </script>
+</body>
+
+</html>

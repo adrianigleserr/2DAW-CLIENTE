@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: El Jefe Final</title>
+    <style>
+        /* Variables CSS básicas */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: all 0.3s; /* Cambio suave de colores */
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* CLASES PARA EL MODO OSCURO / CLARO */
+        .tema-claro {
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .tema-oscuro {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .tarjeta {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        img {
+            height: 250px;
+            width: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 3px solid #ccc;
+        }
+
+        input, select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: #218838; }
+        
+        #btnBorrar { background-color: #dc3545; }
+        #btnBorrar:hover { background-color: #c82333; }
+
+        /* El cronómetro que pondrá nervioso al usuario */
+        #cronometro {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .oculto { display: none; }
+    </style>
+</head>
+<body class="tema-claro">
+
+    <!-- ZONA 1: Registro (Se ve al principio) -->
+    <div id="zonaRegistro" class="tarjeta">
+        <h2>Registro VIP SD EBRIA</h2>
+        <p id="cronometro">Tiempo restante: 30s</p>
+        
+        <input type="text" id="cajaNombre" placeholder="Escribe tu nombre...">
+        
+        <select id="selectJugador">
+            <option value="inicio">-- Elige tu avatar --</option>
+            <option value="Dieguito.jpg">Dieguito</option>
+            <option value="Felipe.png">Felipe</option>
+            <option value="Ivan.png">Iván</option>
+        </select>
+
+        <select id="selectTema">
+            <option value="tema-claro">Modo Claro ☀️</option>
+            <option value="tema-oscuro">Modo Oscuro 🌙</option>
+        </select>
+
+        <br>
+        <img id="imagenPrevia" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png" alt="Previsualización">
+        
+        <button id="btnGuardar">Completar Registro</button>
+    </div>
+
+    <!-- ZONA 2: Perfil (Se ve cuando ya estás guardado) -->
+    <div id="zonaPerfil" class="tarjeta oculto">
+        <h2 id="mensajeBienvenida"></h2>
+        <img id="imagenPerfil" src="" alt="Tu Avatar">
+        <p>Tus preferencias se han cargado desde la memoria.</p>
+        <button id="btnBorrar">Cerrar Sesión y Borrar Memoria</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. ATRAPAMOS TODOS LOS ELEMENTOS
+            let zonaRegistro = document.getElementById("zonaRegistro");
+            let zonaPerfil = document.getElementById("zonaPerfil");
+            
+            let cajaNombre = document.getElementById("cajaNombre");
+            let selectJugador = document.getElementById("selectJugador");
+            let selectTema = document.getElementById("selectTema");
+            let imagenPrevia = document.getElementById("imagenPrevia");
+            
+            let btnGuardar = document.getElementById("btnGuardar");
+            let btnBorrar = document.getElementById("btnBorrar");
+            
+            let mensajeBienvenida = document.getElementById("mensajeBienvenida");
+            let imagenPerfil = document.getElementById("imagenPerfil");
+            let textoCronometro = document.getElementById("cronometro");
+
+            let temporizadorInterv; // Variable para guardar el cronómetro
+
+            // ==========================================
+            // COMPROBACIÓN INICIAL AL CARGAR LA PÁGINA
+            // ==========================================
+            let nombreGuardado = localStorage.getItem("vipNombre");
+            let fotoGuardada = localStorage.getItem("vipFoto");
+            let temaGuardado = localStorage.getItem("vipTema");
+
+            if (nombreGuardado !== null) {
+                // SI YA ESTÁ REGISTRADO:
+                zonaRegistro.classList.add("oculto");
+                zonaPerfil.classList.remove("oculto");
+                
+                // Aplicamos los datos guardados
+                mensajeBienvenida.innerHTML = "¡Bienvenido de nuevo, " + nombreGuardado + "!";
+                imagenPerfil.src = fotoGuardada;
+                document.body.className = temaGuardado; // Cambiamos la clase del body al tema guardado
+                
+            } else {
+                // SI ES NUEVO: Arrancamos el cronómetro de 30 segundos
+                let segundos = 30;
+                
+                temporizadorInterv = setInterval(function() {
+                    segundos--;
+                    textoCronometro.innerHTML = "Tiempo restante: " + segundos + "s";
+                    
+                    if (segundos <= 0) {
+                        clearInterval(temporizadorInterv); // Paramos el reloj
+                        alert("¡Se acabó el tiempo! No pudiste registrarte.");
+                        btnGuardar.disabled = true; // Desactivamos el botón
+                        cajaNombre.disabled = true;
+                        selectJugador.disabled = true;
+                    }
+                }, 1000); // Se ejecuta cada 1000ms (1 segundo)
+            }
+
+
+            // ==========================================
+            // EVENTOS DE LOS DESPLEGABLES (Interacción en vivo)
+            // ==========================================
+            
+            // Cambiar la foto al elegir jugador
+            selectJugador.addEventListener("change", function() {
+                if (selectJugador.value !== "inicio") {
+                    imagenPrevia.src = selectJugador.value; // El value es directamente el nombre del archivo
+                }
+            });
+
+            // Cambiar el modo oscuro/claro en vivo
+            selectTema.addEventListener("change", function() {
+                // Reemplazamos todas las clases del body por la que hemos seleccionado
+                document.body.className = selectTema.value; 
+            });
+
+
+            // ==========================================
+            // EVENTOS DE LOS BOTONES
+            // ==========================================
+            btnGuardar.addEventListener("click", function() {
+                let nombre = cajaNombre.value.trim();
+                let foto = selectJugador.value;
+                let tema = selectTema.value;
+
+                if (nombre === "" || foto === "inicio") {
+                    alert("Por favor, rellena tu nombre y elige un jugador.");
+                } else {
+                    // 1. Guardamos en memoria
+                    localStorage.setItem("vipNombre", nombre);
+                    localStorage.setItem("vipFoto", foto);
+                    localStorage.setItem("vipTema", tema);
+
+                    // 2. Paramos el cronómetro para que no nos moleste más
+                    clearInterval(temporizadorInterv);
+
+                    // 3. Cambiamos de pantalla manualmente
+                    zonaRegistro.classList.add("oculto");
+                    zonaPerfil.classList.remove("oculto");
+                    
+                    mensajeBienvenida.innerHTML = "¡Registro completado, " + nombre + "!";
+                    imagenPerfil.src = foto;
+                }
+            });
+
+            btnBorrar.addEventListener("click", function() {
+                // Borramos todo
+                localStorage.removeItem("vipNombre");
+                localStorage.removeItem("vipFoto");
+                localStorage.removeItem("vipTema");
+                
+                // Forzamos a recargar la página para que vuelva al estado inicial
+                window.location.reload(); 
+            });
+
+        });
+    </script>
+</body>
+</html>

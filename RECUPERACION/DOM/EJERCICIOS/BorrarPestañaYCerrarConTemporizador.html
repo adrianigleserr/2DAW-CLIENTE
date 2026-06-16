@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Destrucción Total</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 50px; 
+            text-align: center; 
+            background-color: #222; 
+            color: white; 
+            transition: background-color 0.5s;
+        }
+        #reloj { 
+            font-size: 100px; 
+            color: #ff4444; 
+            font-weight: bold; 
+            margin: 20px 0;
+        }
+        p {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⚠️ ADVERTENCIA ⚠️</h1>
+    <p>Esta página eliminará todo su contenido en:</p>
+    
+    <div id="reloj">10</div>
+    
+    <p>Y 5 segundos después de quedarse en blanco, la pestaña se cerrará sola.</p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            let tiempo = 10;
+            let relojElemento = document.getElementById("reloj");
+
+            // 1. Cronómetro de 10 segundos (setInterval)
+            let cuentaAtras = setInterval(function() {
+                tiempo--; // Restamos un segundo
+                relojElemento.innerHTML = tiempo; // Actualizamos el número en pantalla
+
+                // Cuando llega a cero...
+                if (tiempo <= 0) {
+                    clearInterval(cuentaAtras); // Paramos este reloj para que no siga contando en negativo
+                    
+                    // 2. ELIMINAR TODO EL CONTENIDO (Dejar en blanco)
+                    // El truco más fácil: vaciar el HTML del body y poner el fondo blanco
+                    document.body.innerHTML = ""; 
+                    document.body.style.backgroundColor = "white"; 
+
+                    // 3. Esperar 5 segundos (setTimeout) y cerrar la pestaña
+                    setTimeout(function() {
+                        
+                        // Cerramos la pestaña
+                        window.close();
+                        
+                    }, 5000); // 5000 milisegundos = 5 segundos
+                }
+            }, 1000); // El intervalo da una vuelta cada 1000ms (1 segundo)
+
+        });
+    </script>
+</body>
+</html>

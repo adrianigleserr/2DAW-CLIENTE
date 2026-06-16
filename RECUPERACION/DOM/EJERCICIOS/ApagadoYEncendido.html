@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: Comprobar Clases</title>
+    <style>
+        body { font-family: Arial; padding: 50px; text-align: center; }
+        .cuadro {
+            width: 150px;
+            height: 150px;
+            background-color: gray;
+            margin: 20px auto;
+            border: 4px solid black;
+        }
+        
+        /* Esta es la clase que vamos a investigar */
+        .encendido {
+            background-color: yellow;
+            border-color: orange;
+        }
+
+        button { padding: 10px 20px; font-size: 16px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>El Detector de Estado</h2>
+    
+    <div id="bombilla" class="cuadro"></div>
+    
+    <button id="btnInterruptor">Encender/Apagar</button>
+    <button id="btnInvestigar">¿En qué estado está?</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            let bombilla = document.getElementById("bombilla");
+            let btnInterruptor = document.getElementById("btnInterruptor");
+            let btnInvestigar = document.getElementById("btnInvestigar");
+
+            // Botón 1: Alterna la clase encendido (Pone o quita)
+            btnInterruptor.addEventListener("click", function() {
+                bombilla.classList.toggle("encendido");
+            });
+
+            // Botón 2: El que pregunta usando CONTAINS
+            btnInvestigar.addEventListener("click", function() {
+                
+                // Le preguntamos al elemento si en este momento tiene la clase "encendido"
+                if (bombilla.classList.contains("encendido")) {
+                    alert("He investigado y la bombilla está ENCENDIDA.");
+                } else {
+                    alert("He investigado y la bombilla está APAGADA.");
+                }
+                
+            });
+
+        });
+    </script>
+</body>
+</html>

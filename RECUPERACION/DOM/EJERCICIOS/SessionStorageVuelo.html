@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen: SessionStorage (Vuelo)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .tarjeta {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 380px;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .botones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #btnReservar { background-color: #00897b; }
+        #btnReservar:hover { background-color: #00695c; }
+        
+        #btnVerReserva { background-color: #fb8c00; }
+        #btnVerReserva:hover { background-color: #e65100; }
+
+        #btnCancelar { background-color: #e53935; }
+        #btnCancelar:hover { background-color: #c62828; }
+
+        #zonaMensaje {
+            margin-top: 20px;
+            min-height: 50px;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tarjeta">
+        <h2>✈️ Vuelos SD EBRIA</h2>
+        <p>Reserva tu asiento para el próximo partido:</p>
+        
+        <input type="text" id="cajaPasajero" placeholder="Nombre del pasajero...">
+        
+        <select id="selectAsiento">
+            <option value="">-- Elige un asiento --</option>
+            <option value="1A (Ventanilla)">1A (Ventanilla)</option>
+            <option value="1B (Pasillo)">1B (Pasillo)</option>
+            <option value="2A (Ventanilla)">2A (Ventanilla)</option>
+            <option value="2B (Pasillo)">2B (Pasillo)</option>
+        </select>
+        
+        <div class="botones">
+            <button id="btnReservar">1. Confirmar Reserva</button>
+            <button id="btnVerReserva">2. Ver mi Tarjeta de Embarque</button>
+            <button id="btnCancelar">3. Cancelar Vuelo</button>
+        </div>
+
+        <div id="zonaMensaje">
+            <h3 id="textoMensaje"></h3>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // Atrapamos todos los elementos
+            let cajaPasajero = document.getElementById("cajaPasajero");
+            let selectAsiento = document.getElementById("selectAsiento");
+            
+            let btnReservar = document.getElementById("btnReservar");
+            let btnVerReserva = document.getElementById("btnVerReserva");
+            let btnCancelar = document.getElementById("btnCancelar");
+            
+            let textoMensaje = document.getElementById("textoMensaje");
+
+            // --- BOTÓN 1: RESERVAR ---
+            btnReservar.addEventListener("click", function() {
+                let nombre = cajaPasajero.value.trim();
+                let asiento = selectAsiento.value;
+
+                if (nombre !== "" && asiento !== "") {
+                    // Usamos sessionStorage: se borrará si cerramos la pestaña
+                    sessionStorage.setItem("pasajeroVuelo", nombre);
+                    sessionStorage.setItem("asientoVuelo", asiento);
+                    
+                    textoMensaje.innerHTML = "✅ Reserva temporal guardada para esta sesión.";
+                    textoMensaje.style.backgroundColor = "#e8f5e9";
+                    textoMensaje.style.color = "#2e7d32";
+                } else {
+                    textoMensaje.innerHTML = "⚠️ Rellena el nombre y elige un asiento.";
+                    textoMensaje.style.backgroundColor = "#fff3e0";
+                    textoMensaje.style.color = "#ef6c00";
+                }
+            });
+
+            // --- BOTÓN 2: VER RESERVA ---
+            btnVerReserva.addEventListener("click", function() {
+                let pasajeroGuardado = sessionStorage.getItem("pasajeroVuelo");
+                let asientoGuardado = sessionStorage.getItem("asientoVuelo");
+
+                if (pasajeroGuardado === null) {
+                    textoMensaje.innerHTML = "❌ No tienes ninguna reserva activa en esta sesión.";
+                    textoMensaje.style.backgroundColor = "#ffebee";
+                    textoMensaje.style.color = "#c62828";
+                } else {
+                    textoMensaje.innerHTML = "🎫 Pasajero: <b>" + pasajeroGuardado + "</b><br>💺 Asiento: <b>" + asientoGuardado + "</b>";
+                    textoMensaje.style.backgroundColor = "#e3f2fd";
+                    textoMensaje.style.color = "#1565c0";
+                }
+            });
+
+            // --- BOTÓN 3: CANCELAR ---
+            btnCancelar.addEventListener("click", function() {
+                // Borramos todo de la sesión
+                sessionStorage.removeItem("pasajeroVuelo");
+                sessionStorage.removeItem("asientoVuelo");
+                
+                // Limpiamos el formulario
+                cajaPasajero.value = "";
+                selectAsiento.value = "";
+                
+                textoMensaje.innerHTML = "🗑️ Reserva cancelada. Asiento liberado.";
+                textoMensaje.style.backgroundColor = "#fafafa";
+                textoMensaje.style.color = "#616161";
+            });
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Crearlo en la memoria (todavía no se ve en pantalla)
+        let nuevoBoton = document.createElement("button");
+
+        // 2. Darle texto y atributos
+        nuevoBoton.innerHTML = "Púlsame";
+        nuevoBoton.id = "btnDinamico";
+
+        // 3. Engancharlo a un padre para que aparezca en pantalla
+        let contenedor = document.getElementById("miContenedor");
+        contenedor.appendChild(nuevoBoton); // Lo pone al final del contenedor
+    </script>
+</body>
+
+</html>

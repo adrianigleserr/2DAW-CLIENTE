@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // HTML: <div id="contenedor"><p id="viejo">Párrafo Antiguo</p></div>
+
+        let padre = document.getElementById("contenedor");
+        let parrafoViejo = document.getElementById("viejo");
+
+        // 1. Creamos el elemento nuevo
+        let parrafoNuevo = document.createElement("p");
+        parrafoNuevo.innerHTML = "Soy el párrafo suplente";
+
+        // 2. Ejecutamos el cambiazo: padre.replaceChild(nuevo, viejo)
+        padre.replaceChild(parrafoNuevo, parrafoViejo);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Otro de control rápido</title>
+  <script language="javascript">
+	/*Dado el siguiente código:
+	elaborar el código que asigne oyente de evento "change" al select anterior. No sabemos qué item ocupa en el formulario.
+	Y controlar que el texto del elemento seleccionado se visualice en el div.
+	Se deberá controlar el objeto evento para presentar el valor del desplegable.
+	solucion:*/
+	let resultado,selectElement
+	function iniciar(){
+		selectElement = document.querySelector('.nieve');
+		resultado = document.querySelector('.resultado');
+		selectElement.addEventListener('change', (event) => {
+    			
+    			resultado.textContent = `Te gusta el sabor ${event.target.value}`;
+		},false);
+		while (resultado.firstChild){
+		//while (resultado.firstElementChild){
+			//console.log(resultado.firstChild);
+			resultado.removeChild(resultado.firstChild);
+			
+		}
+		//limpiar();
+		
+	}
+	function limpiar(){
+		console.log("dentro");
+		console.log(resultado)
+		console.log(resultado.children[0]);
+	}
+	document.addEventListener("DOMContentLoaded",iniciar,true);
+  </script>
+  </head>
+  <body>
+    	<label>Elija un sabor de nieve:
+    	<select class="nieve">
+        	<option value="">Seleccione Uno …</option>
+        	<option value="chocolate">Chocolate</option>
+        	<option value="sardina">Sardina</option>
+        	<option value="vainilla">Vainilla</option>
+    	</select>
+	</label>
+	<div class="resultado">
+		Hola. Esto es un nodo de tipo texto;
+		<p>Elemento a eliminar</p>
+		<h2>Título que no aparecerá</h2>
+	</div>
+  </body>
+</html>
